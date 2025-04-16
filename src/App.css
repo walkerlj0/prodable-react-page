@@ -1,12 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Reddit+Mono:wght@200..900&family=Special+Elite&display=swap');
 
-/* Navigation menu uses Special Elite like the game */
-nav, .nav-link, .navbar-brand {
-  font-family: 'Special Elite', cursive;
+/* Large headers use Reddit Mono */
+h1, h2 {
+  font-family: 'Reddit Mono', monospace;
+  font-weight: 700;
 }
 
-/* Headers use Courier Prime */
-h1, h2, h3, h4, h5, h6 {
+/* Smaller headers use Courier Prime */
+h3, h4, h5, h6 {
   font-family: 'Courier Prime', monospace;
   font-weight: 700;
 }
