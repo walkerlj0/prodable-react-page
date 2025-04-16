@@ -1,10 +1,10 @@
-import logo from '../assets/prodable-logo-noback.svg';
+import titleLogo from '../assets/Prodable_Title-noback.svg';
 
 function Home() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={titleLogo} className="App-logo" alt="Prodable" />
         <p>
           Welcome to Prodable Technical Consulting Agency
         </p>
