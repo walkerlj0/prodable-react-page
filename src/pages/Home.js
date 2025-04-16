@@ -6,9 +6,9 @@ function Home() {
     <div className="App">
       <header className="App-header">
         <img src={titleLogo} className="App-logo" alt="Prodable" />
-        <p>
+        <h2>
           Welcome to Prodable Technical Consulting Agency
-        </p>
+        </h2>
         <Link
           to="/portfolio"
           className="App-link"
