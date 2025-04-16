@@ -1,4 +1,5 @@
 import titleLogo from '../assets/Prodable_Title-noback.svg';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -8,14 +9,12 @@ function Home() {
         <p>
           Welcome to Prodable Technical Consulting Agency
         </p>
-        <a
-          className="Visit our Homepage"
-          href="https://prodable.org/portfolio"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          to="/portfolio"
+          className="App-link"
         >
           Visit Our Portfolio
-        </a>
+        </Link>
       </header>
     </div>
   );
