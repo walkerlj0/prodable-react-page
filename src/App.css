@@ -3,7 +3,7 @@
 /* Large headers use Reddit Mono */
 h1, h2 {
   font-family: 'Reddit Mono', monospace;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 /* Smaller headers use Courier Prime */
