@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
 .nav-menu {
   background-color: #f0f0f0;
   padding: 0.5rem 2rem;
@@ -10,12 +12,14 @@
   justify-content: space-between;
   box-sizing: border-box;
   height: 60px;
+  font-family: 'Special Elite', cursive !important;
 }
 
 .nav-logo {
   height: 100%;
   display: flex;
   align-items: center;
+  font-family: 'Special Elite', cursive !important;
 }
 
 .nav-logo img {
@@ -38,6 +42,7 @@
   text-decoration: none;
   font-size: 1.1rem;
   transition: color 0.3s ease;
+  font-family: 'Special Elite', cursive !important;
 }
 
 .nav-menu a:hover {

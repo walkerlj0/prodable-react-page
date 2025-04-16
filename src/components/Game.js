@@ -3,7 +3,19 @@ import logo from '../assets/prodable-logo-noback.svg';
 import './Game.css';
 
 const LETTERS = ['P', 'R', 'O', 'D', 'A', 'B', 'L', 'E'];
-const MIN_OBSTACLE_SPACING = 60; // Minimum percentage space between obstacles
+const BASE_OBSTACLE_SPACING = 60; // Base spacing between obstacles
+
+// Function to get random spacing variation
+const getRandomSpacing = () => {
+  const variations = [
+    BASE_OBSTACLE_SPACING * 0.5,  // 50% closer
+    BASE_OBSTACLE_SPACING * 0.6,  // 40% closer
+    BASE_OBSTACLE_SPACING,        // Normal spacing
+    BASE_OBSTACLE_SPACING * 1.1,  // 10% further
+    BASE_OBSTACLE_SPACING * 1.2   // 20% further
+  ];
+  return variations[Math.floor(Math.random() * variations.length)];
+};
 
 const Game = () => {
   const [isJumping, setIsJumping] = useState(false);
@@ -73,16 +85,19 @@ const Game = () => {
       const timeSinceLastObstacle = currentTime - lastObstacleTime;
       
       // Check if there's enough space for a new obstacle
+      const lastObstacle = obstacles[obstacles.length - 1];
+      const minSpacing = lastObstacle ? getRandomSpacing() : 0;
       const canAddObstacle = obstacles.length === 0 || 
-        obstacles.every(obs => obs.left < (100 - MIN_OBSTACLE_SPACING));
+        lastObstacle.left < (100 - minSpacing);
 
-      // Create new obstacles with minimum time gap (1.5 seconds) and space check
-      if (canAddObstacle && timeSinceLastObstacle > 1500 && Math.random() < 0.1) {
+      // Create new obstacles with minimum time gap (1.2 seconds)
+      if (canAddObstacle && timeSinceLastObstacle > 1200 && Math.random() < 0.15) {
         const randomLetter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
         setObstacles(prev => [...prev, { 
           left: 100, 
           id: Date.now(),
-          letter: randomLetter 
+          letter: randomLetter,
+          speed: 0.4 + (Math.random() * 0.2 - 0.1) // Speed varies between 0.3 and 0.5
         }]);
         setLastObstacleTime(currentTime);
       }
@@ -90,7 +105,10 @@ const Game = () => {
       // Move obstacles and check collisions
       setObstacles(prev => {
         const newObstacles = prev
-          .map(obstacle => ({ ...obstacle, left: obstacle.left - 0.4 })) // Slightly slower movement
+          .map(obstacle => ({ 
+            ...obstacle, 
+            left: obstacle.left - (obstacle.speed || 0.4)
+          }))
           .filter(obstacle => obstacle.left > -10);
 
         const character = document.querySelector('.character');

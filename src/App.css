@@ -1,7 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&display=swap');
 
-* {
+/* Navigation menu uses Special Elite like the game */
+nav, .nav-link, .navbar-brand {
   font-family: 'Special Elite', cursive;
+}
+
+/* Headers use Courier Prime */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Courier Prime', monospace;
+  font-weight: 700;
+}
+
+/* Paragraphs and other text use Courier Prime */
+p, span, div:not(.obstacle):not(.nav-menu):not(.nav-logo), button {
+  font-family: 'Courier Prime', monospace;
 }
 
 .App {
@@ -29,11 +41,17 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #282c34;
-  padding-top: 60px; /* Add space for the fixed navigation */
+  padding-top: 60px;
 }
 
-.App-link {
-  color: #61dafb;
+.App-link, a:not(.nav-link) {
+  color: #000080;
+  font-family: 'Courier Prime', monospace;
+  text-decoration: none;
+}
+
+.App-link:hover, a:hover {
+  text-decoration: underline;
 }
 
 .page {
@@ -41,6 +59,10 @@
   min-height: 100vh;
   padding: 80px 20px 20px;
   text-align: center;
+}
+
+.obstacle {
+  font-family: 'Special Elite', cursive !important;
 }
 
 @keyframes App-logo-pulse {
