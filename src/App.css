@@ -23,10 +23,18 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #282c34;
+  padding-top: 60px; /* Add space for the fixed navigation */
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.page {
+  background-color: rgb(183, 221, 214);
+  min-height: 100vh;
+  padding: 80px 20px 20px;
+  text-align: center;
 }
 
 @keyframes App-logo-pulse {
