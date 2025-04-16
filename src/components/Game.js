@@ -40,14 +40,14 @@ const Game = () => {
     setLastObstacleTime(Date.now());
   };
 
-  const handleInteraction = (e) => {
+  const handleInteraction = useCallback((e) => {
     e.preventDefault();
     if (!gameStarted) {
       startGame();
     } else {
       jump();
     }
-  };
+  }, [gameStarted, startGame, jump]);
 
   const checkCollision = useCallback((characterBox, obstacleBox) => {
     // Create a smaller hitbox for the character (70% of original size)
@@ -78,7 +78,7 @@ const Game = () => {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [jump, gameStarted]);
+  }, [handleInteraction]);
 
   useEffect(() => {
     if (!gameStarted || gameOver) return;

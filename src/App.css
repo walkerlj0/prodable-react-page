@@ -2,7 +2,7 @@
 
 /* Large headers use Reddit Mono */
 h1, h2 {
-  font-family: 'Reddit Mono', monospace;
+  font-family: 'Special Elite', cursive;
   font-weight: 500;
 }
 
@@ -45,13 +45,31 @@ p, span, div:not(.obstacle):not(.nav-menu):not(.nav-logo), button {
   padding-top: 60px;
 }
 
-.App-link, a:not(.nav-link) {
-  color: #000080;
-  font-family: 'Courier Prime', monospace;
+/* Global link styles */
+a {
+  color: #495858;  /* dark greyish-teal */
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.App-link:hover, a:hover {
+a:hover {
+  color: #5e8d8d;  /* slightly lighter on hover */
+}
+
+/* Keep button-style links (like App-link) unchanged */
+a.App-link {
+  color: #528b8b;
+}
+
+a.App-link:hover {
+  color: white;
+}
+
+.App-link, a:not(.nav-link) {
+  font-family: 'Courier Prime', monospace;
+}
+
+.App-link:hover, a:hover:not(.App-link) {
   text-decoration: underline;
 }
 
