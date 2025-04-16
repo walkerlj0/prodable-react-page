@@ -40,6 +40,15 @@ const Game = () => {
     setLastObstacleTime(Date.now());
   };
 
+  const handleInteraction = (e) => {
+    e.preventDefault();
+    if (!gameStarted) {
+      startGame();
+    } else {
+      jump();
+    }
+  };
+
   const checkCollision = useCallback((characterBox, obstacleBox) => {
     // Create a smaller hitbox for the character (70% of original size)
     const hitboxReduction = 0.3;
@@ -63,11 +72,7 @@ const Game = () => {
     const handleKeyPress = (event) => {
       if (event.code === 'Space') {
         event.preventDefault();
-        if (!gameStarted) {
-          startGame();
-        } else {
-          jump();
-        }
+        handleInteraction(event);
       }
     };
 
@@ -84,33 +89,31 @@ const Game = () => {
       const currentTime = Date.now();
       const timeSinceLastObstacle = currentTime - lastObstacleTime;
       
-      // Check if there's enough space for a new obstacle
       const lastObstacle = obstacles[obstacles.length - 1];
       const minSpacing = lastObstacle ? getRandomSpacing() : 0;
       const canAddObstacle = obstacles.length === 0 || 
         lastObstacle.left < (100 - minSpacing);
 
-      // Create new obstacles with minimum time gap (1.2 seconds)
       if (canAddObstacle && timeSinceLastObstacle > 1200 && Math.random() < 0.15) {
         const randomLetter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
         setObstacles(prev => [...prev, { 
           left: 100, 
           id: Date.now(),
           letter: randomLetter,
-          speed: 0.4 + (Math.random() * 0.2 - 0.1) // Speed varies between 0.3 and 0.5
+          speed: 0.4 + (Math.random() * 0.2 - 0.1)
         }]);
         setLastObstacleTime(currentTime);
       }
 
-      // Move obstacles and check collisions
       setObstacles(prev => {
         const newObstacles = prev
-          .map(obstacle => ({ 
-            ...obstacle, 
-            left: obstacle.left - (obstacle.speed || 0.4)
+          .map(obstacle => ({
+            ...obstacle,
+            left: obstacle.left - obstacle.speed
           }))
           .filter(obstacle => obstacle.left > -10);
 
+        // Check for collisions
         const character = document.querySelector('.character');
         const characterBox = character?.getBoundingClientRect();
 
@@ -118,7 +121,7 @@ const Game = () => {
           for (const obstacle of newObstacles) {
             const obstacleElement = document.querySelector(`[data-id="${obstacle.id}"]`);
             const obstacleBox = obstacleElement?.getBoundingClientRect();
-
+            
             if (obstacleBox && checkCollision(characterBox, obstacleBox)) {
               setGameOver(true);
               break;
@@ -131,42 +134,44 @@ const Game = () => {
     }, 16);
 
     return () => clearInterval(gameLoop);
-  }, [gameStarted, gameOver, checkCollision, obstacles, lastObstacleTime]);
+  }, [gameStarted, gameOver, obstacles, lastObstacleTime, checkCollision]);
 
   return (
-    <div className="game-container">
-      <div className="score">Score: {score}</div>
-      {!gameStarted ? (
-        <div className="start-screen">
-          <h2>Press SPACE to Start</h2>
-          <p>Use SPACE to jump over obstacles</p>
+    <div 
+      className="game-container"
+      onTouchStart={handleInteraction}
+      onClick={handleInteraction}
+    >
+      <div className="game-area">
+        <div className={`character ${isJumping ? 'jump' : ''}`}>
+          <img src={logo} alt="Character" style={{ width: '100%', height: '100%' }} />
         </div>
-      ) : (
-        <div className="game-area">
-          <img 
-            src={logo} 
-            alt="Character" 
-            className={`character ${isJumping ? 'jump' : ''}`}
-          />
-          {obstacles.map(obstacle => (
-            <div 
-              key={obstacle.id}
-              data-id={obstacle.id}
-              className="obstacle"
-              style={{ left: `${obstacle.left}%` }}
-            >
-              {obstacle.letter}
-            </div>
-          ))}
-        </div>
-      )}
-      {gameOver && (
-        <div className="game-over">
-          <h2>Game Over!</h2>
-          <p>Final Score: {score}</p>
-          <button onClick={startGame}>Play Again</button>
-        </div>
-      )}
+        {obstacles.map(obstacle => (
+          <div
+            key={obstacle.id}
+            data-id={obstacle.id}
+            className="obstacle"
+            style={{ left: `${obstacle.left}%` }}
+          >
+            {obstacle.letter}
+          </div>
+        ))}
+        <div className="score">Score: {score}</div>
+        {!gameStarted && (
+          <div className="start-screen">
+            <h2>Prodable Runner</h2>
+            <p>Press SPACEBAR or tap/click anywhere to start</p>
+            <p>Jump over the letters to survive!</p>
+          </div>
+        )}
+        {gameOver && (
+          <div className="game-over">
+            <h2>Game Over!</h2>
+            <p>Final Score: {score}</p>
+            <button onClick={startGame}>Play Again</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
