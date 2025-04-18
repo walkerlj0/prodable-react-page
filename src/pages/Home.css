@@ -11,7 +11,7 @@
 }
 
 .App-header {
-  background: linear-gradient(to top, hsl(180, 57%, 86%), #ffffff);
+  background: linear-gradient(to top, #b0b3b3, #ffffff);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -30,7 +30,7 @@
   border: none;
   border-radius: 5px;
   transition: all 0.3s ease;
-  background-color: hsl(180, 57%, 86%);
+  background-color: #b0b3b3;
   color: white;
 }
 
@@ -57,6 +57,7 @@
   background-color: #1a1a1a;
   color: white;
   padding: 4rem 2rem;
+  overflow: hidden;  /* Add this to contain the parallax effect */
 }
 
 .dark-section-content {
@@ -66,6 +67,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
+  position: relative;  /* Add this for proper parallax positioning */
 }
 
 .dark-section-text h2 {
@@ -79,9 +81,25 @@
   margin-bottom: 1.5rem;
 }
 
+.dark-section-text {
+  position: relative;  /* Add this for proper parallax positioning */
+  z-index: 1;  /* Ensure text stays above other elements */
+  will-change: transform;  /* Optimize performance */
+}
+
 .dark-section-image {
-  background-color: #333;
+  position: relative;
+  will-change: transform;
+  width: 100%;
   height: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dark-section-image iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
   border-radius: 10px;
 }
 
@@ -105,17 +123,41 @@
 }
 
 .grid-item {
-  background-color: white;
-  padding: 2rem;
+  background: #fff;
   border-radius: 10px;
+  padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+  transform-origin: center;
+}
+
+.grid-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.grid-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.5s ease;
 }
 
 .grid-embed {
-  background-color: #ddd;
+  width: 100%;
   height: 200px;
-  border-radius: 5px;
-  margin-bottom: 1.5rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: transform 0.5s ease;
+}
+
+.grid-item:hover .grid-embed {
+  transform: scale(1.05);
 }
 
 .grid-item h3 {

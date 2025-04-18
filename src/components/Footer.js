@@ -7,7 +7,7 @@ function Footer() {
       <div className="footer-content">
         <div className="footer-section">
           <h3>Prodable</h3>
-          <p>Technical solutions for modern challenges</p>
+          <p><i>Bridging highly technical teams and functional audiences</i></p>
         </div>
         <div className="footer-section">
           <h4>Quick Links</h4>
@@ -19,8 +19,8 @@ function Footer() {
         </div>
         <div className="footer-section">
           <h4>Contact</h4>
-          <p>Email: info@prodable.com</p>
-          <p>Location: Silicon Valley, CA</p>
+          <p>Email: info@prodable.org</p>
+          <p>Location: Austin, TX</p>
         </div>
       </div>
       <div className="footer-bottom">
