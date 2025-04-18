@@ -19,7 +19,7 @@ function Home() {
             <p>
               Prodable is a consulting agency made up of experienced, native english-speaking engineers
               that specialize in technical documentation. With services and offerings that include
-              technical writing & research, whitepaper authoring, documentation platform setup and maintenance, 
+              technical writing & research, curriculum development, whitepaper authoring, documentation platform setup and maintenance, 
               website setup & copywriting, documentation architecture, and developer relations services. 
               <br></br>
               <br></br>
@@ -74,7 +74,7 @@ function Home() {
               </div>
               <h3><Link to="https://dispatch.starlinglab.org/">Starling Lab Outreach</Link></h3>
               <p>
-                Etablished a blog, content, in-person and online workshops, 
+                Etablished a blog, posts, a social media presence in-person and online workshops, 
                 wrote Case Studies for Starling Lab Fellowships, 
                 and helped design a Stanford Univsersity course.
               </p>
@@ -89,8 +89,8 @@ function Home() {
               </div>
               <h3><Link to="https://www.impossiblecloudnetwork.com/">Impossible Cloud Network Litepaper</Link></h3>
               <p>
-                Helped translate and edit the original whitepaper into andeasily disgetible
-                litepaper prior to the public token sale.
+                Helped translate and edit the original whitepaper into a clear and concise
+                published litepaper prior to the public token sale.
               </p>
             </div>
           </div>
