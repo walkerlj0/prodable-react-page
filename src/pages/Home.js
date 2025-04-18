@@ -57,6 +57,11 @@ function Home() {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
+              <div className="dark-section-subheading">
+                <a href="https://www.youtube.com/playlist?list=PLQIpPhDqrx4U3I-MSveHXJg3DWHcvhzfC" target="_blank" rel="noopener noreferrer">
+                <h2>Presentation and Workshop Portfolio</h2>
+                </a>
+              </div>
             </Parallax>
           </div>
         </section>

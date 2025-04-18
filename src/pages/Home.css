@@ -91,16 +91,44 @@
   position: relative;
   will-change: transform;
   width: 100%;
-  height: 400px;
+  min-height: 400px;
   border-radius: 10px;
-  overflow: hidden;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .dark-section-image iframe {
   width: 100%;
-  height: 100%;
+  height: 400px;
   border: none;
   border-radius: 10px;
+  display: block;
+}
+
+.dark-section-subheading {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #f1f1f1;
+}
+
+.dark-section-subheading h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #f1f1f1;
+  font-weight: 600;
+}
+
+.dark-section-subheading a {
+  color: #5e8d8d;
+  text-decoration: underline;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.dark-section-subheading a:hover {
+  color: #87baba;
 }
 
 .grid-section {
