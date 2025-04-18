@@ -4,6 +4,7 @@ import prodableLogo from '../assets/prodable-logo-noback.svg';
 import prodableP from '../assets/prodable-p.svg';
 import icnLitepaper from '../assets/ICN Litepaper.png';
 import dispatch from '../assets/dispatch.png';
+import Footer from '../components/Footer';
 
 // Animated header logic
 const lines = ["P ortfolio"];
@@ -115,6 +116,7 @@ function Portfolio() {
         reverse={false}
         darkBg={false}
       />
+      <Footer />
     </div>
   );
 }
