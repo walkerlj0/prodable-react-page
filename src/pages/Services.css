@@ -66,18 +66,21 @@
 .pricing-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 3rem 2rem;
   margin-top: 2rem;
 }
 
 .pricing-tier {
   background: #fff;
   border-radius: 12px;
-  padding: 2rem;
+  padding: 1.8rem;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  min-height: 300px;
+  height: auto;
 }
 
 .pricing-tier:hover {
@@ -86,7 +89,7 @@
 }
 
 .pricing-tier h3 {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   margin-bottom: 1rem;
   color: #333;
 }
@@ -130,6 +133,111 @@
 
 .pricing-tier .cta-button:hover {
   background: #3e6b6b;
+}
+
+.pricing-tier p {
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.pricing-tier p strong {
+  color: #444;
+  font-weight: 600;
+}
+
+/* Make the grid responsive */
+@media (max-width: 1024px) {
+  .pricing-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Service code styling */
+.service-code {
+  font-size: 1.1rem;
+  color: rgb(82, 139, 139);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+/* Rate button styling */
+.rate-button {
+  background-color: #f0f5f5;
+  color: #528b8b;
+  font-size: 0.85rem;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  margin-top: auto;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  cursor: default;
+}
+
+/* Pricing table styling */
+.hourly-rates-table {
+  width: 100%;
+  margin: 2.5rem 0;
+  border-collapse: collapse;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.hourly-rates-table thead {
+  background-color: #528b8b;
+  color: white;
+}
+
+.hourly-rates-table th {
+  padding: 1.2rem 1rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.hourly-rates-table tbody tr {
+  background-color: white;
+  transition: background-color 0.3s ease;
+}
+
+.hourly-rates-table tbody tr:nth-child(even) {
+  background-color: #f8fbfb;
+}
+
+.hourly-rates-table tbody tr:hover {
+  background-color: #e6f0f0;
+}
+
+.hourly-rates-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+
+.hourly-rates-table td:first-child,
+.hourly-rates-table th:first-child {
+  padding-left: 1.5rem;
+}
+
+.hourly-rates-table td:last-child,
+.hourly-rates-table th:last-child {
+  padding-right: 1.5rem;
+}
+
+.hourly-rates-note {
+  margin-top: 1.5rem;
+  font-style: italic;
+  color: #666;
+  text-align: center;
 }
 
 /* Contact section styling */
@@ -225,14 +333,20 @@
 /* Responsive styles */
 @media (max-width: 900px) {
   .pricing-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .contact-container {
     grid-template-columns: 1fr;
   }
   
-  .service-section {
-    padding: 3rem 2rem;
+  .contact-form {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-container {
+    grid-template-columns: 1fr;
   }
 }

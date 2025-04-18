@@ -79,47 +79,47 @@ function Services() {
       <section className="service-section dark-bg">
         <h2>Pricing</h2>
         <p>
-          We offer flexible pricing options to accommodate different project scopes and budgets. Choose the tier that best fits your needs, or contact us for a custom quote.
+          We offer flexible pricing options to accommodate different project scopes and budgets. Our rates are based on the type of work and complexity of the project. Contact us for a custom quote.
         </p>
+        <p className="hourly-rates-note" style={{ marginBottom: '2rem' }}>Base rate is determined by project complexity and timeline requirements.</p>
         <div className="pricing-container">
           <div className="pricing-tier">
-            <h3>Basic</h3>
-            <div className="price">$2,000</div>
-            <ul>
-              <li>Single document creation</li>
-              <li>Up to 20 pages</li>
-              <li>2 revision rounds</li>
-              <li>Basic formatting</li>
-              <li>Delivery in 2 weeks</li>
-            </ul>
-            <a href="#contact" className="cta-button">Get Started</a>
+            <div className="service-code">001</div>
+            <h3>Discovery</h3>
+            <p>Charges for the analysis and evaluation of initial documents and systems</p>
+            <div className="rate-button">1 × base rate</div>
           </div>
+          
           <div className="pricing-tier">
-            <h3>Standard</h3>
-            <div className="price">$5,000</div>
-            <ul>
-              <li>Multiple document creation</li>
-              <li>Up to 50 pages total</li>
-              <li>3 revision rounds</li>
-              <li>Custom formatting</li>
-              <li>Graphics and diagrams</li>
-              <li>Delivery in 3 weeks</li>
-            </ul>
-            <a href="#contact" className="cta-button">Get Started</a>
+            <div className="service-code">002</div>
+            <h3>Technical Writing & Research</h3>
+            <p>Charges for technical curriculum writing including interviewing, writing, and editing/updating of technical copy, website copy, or other technical material.</p>
+            <p><strong>Deliverables:</strong> Created in a GDoc or similar format.</p>
+            <div className="rate-button">1.2 × base rate</div>
           </div>
+          
           <div className="pricing-tier">
-            <h3>Premium</h3>
-            <div className="price">$10,000+</div>
-            <ul>
-              <li>Comprehensive documentation</li>
-              <li>Unlimited pages</li>
-              <li>Unlimited revisions</li>
-              <li>Custom branding</li>
-              <li>Interactive elements</li>
-              <li>Ongoing support</li>
-              <li>Priority delivery</li>
-            </ul>
-            <a href="#contact" className="cta-button">Get Started</a>
+            <div className="service-code">003</div>
+            <h3>Technical Writing & System Maintenance</h3>
+            <p>Charges for technical writing projects that also include setting up CI, platforms, and updating source code. This can also include technical/engineering documentation that requires the development of code or technical configuration samples.</p>
+            <p><strong>Deliverables:</strong> Authored & updated directly in your website or other system.</p>
+            <div className="rate-button">1.8 × base rate</div>
+          </div>
+          
+          <div className="pricing-tier">
+            <div className="service-code">004</div>
+            <h3>Platform and Website Setup</h3>
+            <p>This includes services where we are setting up a platform or system for documentation, websites, and other systems. This will include recommendations and custom build out of a platform for your company, and internal documentation of how to use and maintain the platform.</p>
+            <p><strong>Deliverables:</strong> A completely operational website or documentation system.</p>
+            <div className="rate-button">1.7 × base rate</div>
+          </div>
+          
+          <div className="pricing-tier">
+            <div className="service-code">005</div>
+            <h3>Documentation Architecture</h3>
+            <p>Charges for the planning and design of technical writing systems, and higher-level technical documentation including whitepapers or technical Case Studies. This could include taking an existing body of docs in various systems and creating a usable, consumer-facing written product.</p>
+            <p><strong>Deliverables:</strong> Open-ended and complex.</p>
+            <div className="rate-button">2 × base rate</div>
           </div>
         </div>
       </section>
@@ -135,10 +135,6 @@ function Services() {
             <div className="contact-method">
               <h3>Email</h3>
               <p><a href="mailto:info@prodable.org">info@prodable.org</a></p>
-            </div>
-            <div className="contact-method">
-              <h3>Phone</h3>
-              <p>(555) 123-4567</p>
             </div>
             <div className="contact-method">
               <h3>Location</h3>
