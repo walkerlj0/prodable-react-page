@@ -1,0 +1,238 @@
+/* Services page specific styles */
+
+/* Header styling similar to portfolio page */
+.services-header {
+  max-width: 90%;
+  margin: 2rem auto 6rem;
+  padding: 3rem 2rem;
+  text-align: center;
+  background: linear-gradient(to bottom, #ffffff 0%, #f0f4f8 100%);
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+}
+
+.services-animated-header {
+  font-family: 'Special Elite', cursive;
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+.services-header p {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+/* Service section styling */
+.service-section {
+  max-width: 85%;
+  margin: 6rem auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.service-section:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.service-section.dark-bg {
+  background: #f0f5f5; /* Subtle teal background */
+}
+
+.service-section h2 {
+  font-family: 'Special Elite', cursive;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+.service-section p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+/* Pricing section styling */
+.pricing-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.pricing-tier {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-tier:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.pricing-tier h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.pricing-tier .price {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #528b8b;
+}
+
+.pricing-tier ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  flex-grow: 1;
+}
+
+.pricing-tier li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.pricing-tier li:last-child {
+  border-bottom: none;
+}
+
+.pricing-tier .cta-button {
+  background: #528b8b;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.pricing-tier .cta-button:hover {
+  background: #3e6b6b;
+}
+
+/* Contact section styling */
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-method {
+  margin-bottom: 2rem;
+}
+
+.contact-method h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.contact-method p {
+  margin: 0.3rem 0;
+}
+
+.contact-method a {
+  color: #528b8b;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-method a:hover {
+  color: #3e6b6b;
+  text-decoration: underline;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #528b8b;
+  outline: none;
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.submit-button {
+  background: #528b8b;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  align-self: flex-start;
+}
+
+.submit-button:hover {
+  background: #3e6b6b;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .pricing-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .service-section {
+    padding: 3rem 2rem;
+  }
+}
