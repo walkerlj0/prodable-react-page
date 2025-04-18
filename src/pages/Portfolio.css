@@ -2,7 +2,7 @@
 
 /* Portfolio section styling */
 .portfolio-section-alt {
-  max-width: 1100px;
+  max-width: 85%; /* Slightly narrower than the header (90%) */
   margin: 6rem auto; /* Increased from 4rem to 6rem for even more space between sections */
   background: #fff;
   border-radius: 18px;
@@ -21,11 +21,11 @@
 
 /* Alternating section backgrounds */
 .portfolio-section-alt.dark-bg {
-  background: #f0f4f8; /* Light gray background for "darker" sections */
+  background: #f0f5f5; /* More subtle light teal background - very light tint */
 }
 
 .portfolio-section-alt.dark-bg .portfolio-section-image {
-  background: #e6ebf0; /* Slightly darker background for image area in dark sections */
+  background: #e8f0f0; /* Slightly darker but still very subtle teal */
 }
 
 .portfolio-section-content {
@@ -41,7 +41,7 @@
 
 .portfolio-section-text {
   flex: 1 1 50%;
-  padding: 3.5rem 3rem; /* Increased padding for more space */
+  padding: 5rem 4rem; /* Increased padding to make sections about 40% taller */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -86,8 +86,8 @@
   align-items: center;
   justify-content: center;
   background: #f7fafd;
-  min-height: 280px; /* Slightly increased */
-  padding: 2.5rem;
+  min-height: 390px; /* Increased by about 40% from 280px */
+  padding: 3.5rem;
   transition: transform 0.5s ease;
   transform-origin: center;
 }
