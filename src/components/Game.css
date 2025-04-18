@@ -5,8 +5,8 @@
   margin: 20px auto;
   position: relative;
   overflow: hidden;
-  background-color: rgb(183, 221, 214);
-  border: 1px dashed rgb(44, 44, 52, 0.5);
+  background-color: #f0f5f5; /* Changed to match portfolio dark-bg */
+  border: 1px dashed rgba(44, 44, 52, 0.5);
   border-radius: 8px;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;

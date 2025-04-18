@@ -1,0 +1,87 @@
+/* Demos page specific styles */
+
+/* Header styling similar to portfolio page */
+.demos-header {
+  max-width: 90%;
+  margin: 2rem auto 6rem;
+  padding: 3rem 2rem;
+  text-align: center;
+  background: linear-gradient(to bottom, #ffffff 0%, #f0f4f8 100%);
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+}
+
+.demos-animated-header {
+  font-family: 'Special Elite', cursive;
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+.demos-header p {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+/* Demo section styling */
+.demos-section {
+  max-width: 85%;
+  margin: 6rem auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.demos-section:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.demos-section.dark-bg {
+  background: #f0f5f5; /* Subtle teal background */
+}
+
+.demos-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-family: 'Special Elite', cursive;
+  text-align: center;
+}
+
+.game-instructions {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 600px;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .demos-section {
+    padding: 3rem 2rem;
+  }
+  
+  .demos-animated-header {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .demos-animated-header {
+    font-size: 2.2rem;
+  }
+  
+  .demos-section h2 {
+    font-size: 1.8rem;
+  }
+}

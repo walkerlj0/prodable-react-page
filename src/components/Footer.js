@@ -1,7 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import './Footer.css';
 
 function Footer() {
+  // Function to smoothly scroll to the contact section
+  const scrollWithOffset = (el) => {
+    const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
+    const yOffset = -80; // Adjust this value based on your header height
+    window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' }); 
+  };
+
   return (
     <footer className="footer">
       <div className="footer-content">
@@ -12,9 +21,9 @@ function Footer() {
         <div className="footer-section">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/portfolio">Portfolio</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/portfolio">Portfolio</Link></li>
+            <li><HashLink to="/services#contact" scroll={scrollWithOffset}>Contact</HashLink></li>
           </ul>
         </div>
         <div className="footer-section">
