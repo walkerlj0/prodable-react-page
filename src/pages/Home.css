@@ -199,6 +199,10 @@
   color: #666;
 }
 
+.page {
+  background: #fff;
+}
+
 @media (max-width: 768px) {
   .dark-section-content {
     grid-template-columns: 1fr;
