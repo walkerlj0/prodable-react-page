@@ -28,10 +28,12 @@ jobs:
           echo "NODE_OPTIONS=--max-old-space-size=4096" >> .env
           echo "REACT_APP_HEADLESS_BROWSER=true" >> .env
           echo "BROWSER=none" >> .env
+          echo "CI=true" >> .env
       - name: Build with additional debugging
         run: |
           export NODE_ENV=production
-          export CI=false
+          # Important: Keep CI=true for proper error handling
+          export CI=true
           # Add more verbose error output
           export DEBUG=true
           # Try to build with more detailed logging
