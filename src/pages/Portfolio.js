@@ -72,9 +72,24 @@ function Portfolio() {
       {/* Header Section */}
       <header className="portfolio-header">
         <AnimatedPortfolioHeader />
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae velit ex. Mauris dapibus risus quis suscipit vulputate. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel pretium lectus quam id leo in vitae turpis massa sed elementum tempus egestas sed sed risus pretium quam vulputate dignissim suspendisse in est ante.
-        </p>
+        <div className="special-font intro-text">
+          <p>
+            Prodable is A versatile technical consulting agency bridging highly technical teams with functional audiences, 
+            delivering value through data-driven product development, technical documentation, and curriculum design.
+          </p>
+        </div>
+        <div className="special-font intro-text">
+          <p>
+            With expertise spanning data analytics, several programming tools and languages, decentralized systems, AI platforms, and educational technology, 
+            we excel at working with cross-functional teams to successfully deliver ambitious projects.
+          </p>
+        </div>
+        <div className="special-font intro-text">
+          <p>
+            Whether developing product roadmaps, managing technical documentation, or designing educational and enablement programs, 
+            our agency combines technical depth with clear communication to transform complex ideas into accessible, impactful solutions.
+          </p>
+        </div>
       </header>
       <PortfolioSection
         icon={prodableLogo}

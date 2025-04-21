@@ -1,5 +1,23 @@
 /* Portfolio page specific styles */
 
+/* Import special font styles */
+.special-font {
+  font-family: 'Special Elite', cursive !important;
+}
+
+.intro-text {
+  max-width: 800px;
+  margin: 2.5rem auto;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.intro-text p {
+  margin-bottom: 1rem;
+  font-family: 'Special Elite', cursive !important;
+}
+
 /* Portfolio section styling */
 .portfolio-section-alt {
   max-width: 85%; /* Slightly narrower than the header (90%) */
