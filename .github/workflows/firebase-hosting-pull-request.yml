@@ -24,9 +24,11 @@ jobs:
           echo "DISABLE_ESLINT_PLUGIN=true" > .env
           echo "SKIP_PREFLIGHT_CHECK=true" >> .env
           echo "GENERATE_SOURCEMAP=false" >> .env
+      - name: Build
+        run: CI=false npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseToken: '${{ secrets.FIREBASE_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRODABLE_REACT_PAGE }}'
           projectId: prodable-react-page
           channelId: live
