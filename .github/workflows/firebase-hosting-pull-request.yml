@@ -36,9 +36,9 @@ jobs:
           export CI=true
           # Add more verbose error output
           export DEBUG=true
-          # Try to build with more detailed logging
-          npm run build || {
-            echo "Build failed, checking for problematic components..."
+          # Try to build with CI-specific script
+          npm run build:ci || {
+            echo "CI build failed, checking for problematic components..."
             # List all component files for reference
             find src -name "*.js" -type f | grep -v "test" | sort
             # Check for window/document references that might cause issues
