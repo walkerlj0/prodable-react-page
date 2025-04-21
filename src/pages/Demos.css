@@ -1,15 +1,7 @@
 /* Demos page specific styles */
 
 /* Header styling similar to portfolio page */
-.demos-header {
-  max-width: 90%;
-  margin: 2rem auto 6rem;
-  padding: 3rem 2rem;
-  text-align: center;
-  background: linear-gradient(to bottom, #ffffff 0%, #f0f4f8 100%);
-  border-radius: 18px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.04);
-}
+/* Removing conflicting demos-header styles to use page-header from App.css */
 
 .demos-animated-header {
   font-family: 'Special Elite', cursive;

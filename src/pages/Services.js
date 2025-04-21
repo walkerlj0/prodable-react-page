@@ -53,7 +53,7 @@ function Services() {
   return (
     <div className="page">
       {/* Header Section */}
-      <header className="services-header">
+      <header className="page-header services-header">
         <AnimatedServicesHeader />
         <p>
           We offer a range of technical consulting services to help bridge the gap between highly technical teams and functional audiences. Our expertise spans documentation, developer relations, and strategic communications.
