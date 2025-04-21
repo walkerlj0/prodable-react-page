@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import './Services.css';
-import prodableLogo from '../assets/prodable-logo-noback.svg';
 
 // Animated header logic
 const lines = ["S ervices"];

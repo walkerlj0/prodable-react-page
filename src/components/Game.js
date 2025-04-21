@@ -32,13 +32,13 @@ const Game = () => {
     }
   }, [isJumping, gameStarted, gameOver]);
 
-  const startGame = () => {
+  const startGame = useCallback(() => {
     setGameStarted(true);
     setGameOver(false);
     setScore(0);
     setObstacles([]);
     setLastObstacleTime(Date.now());
-  };
+  }, []);
 
   const handleInteraction = useCallback((e) => {
     e.preventDefault();
