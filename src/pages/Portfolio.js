@@ -74,7 +74,7 @@ function Portfolio() {
         <AnimatedPortfolioHeader />
         <div className="special-font intro-text">
           <p>
-            Prodable is A versatile technical consulting agency bridging highly technical teams with functional audiences, 
+            Prodable is a versatile technical consulting agency bridging highly technical teams with functional audiences, 
             delivering value through data-driven product development, technical documentation, and curriculum design.
           </p>
         </div>
