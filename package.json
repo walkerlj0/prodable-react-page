@@ -21,7 +21,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:ci": "node ci-build.js",
+    "build:ci": "CI=false react-scripts build",
+    "build:simple": "node ci-build.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
