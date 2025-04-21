@@ -157,6 +157,11 @@ dist
 # firebase config
 src/firebase.js
 
+# firebase cache and deployment files
+.firebase/
+.firebaserc
+firebase-debug.log
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

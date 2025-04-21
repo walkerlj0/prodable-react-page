@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:ci": "cp src/index.ci.js src/index.js && react-scripts build",
+    "build:ci": "cp src/index.js src/index.js.bak && cp src/index.ci.js src/index.js && react-scripts build && mv src/index.js.bak src/index.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
