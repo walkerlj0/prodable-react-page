@@ -118,18 +118,31 @@ function PortfolioSection({ icon, title, text, image, reverse, darkBg, link, cap
 
 function Portfolio() {
   useEffect(() => {
-    // Check if there's a hash in the URL
-    if (window.location.hash) {
-      // Get the element with the ID matching the hash
-      const id = window.location.hash.substring(1);
-      const element = document.getElementById(id);
-      
-      // If the element exists, scroll to it with a slight delay to ensure rendering
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
+    try {
+      // Skip in headless environments
+      if (typeof window === 'undefined' || process.env.REACT_APP_HEADLESS_BROWSER === 'true') {
+        return;
       }
+      
+      // Check if there's a hash in the URL
+      if (window.location.hash) {
+        // Get the element with the ID matching the hash
+        const id = window.location.hash.substring(1);
+        const element = document.getElementById(id);
+        
+        // If the element exists, scroll to it with a slight delay to ensure rendering
+        if (element) {
+          setTimeout(() => {
+            try {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch (error) {
+              console.error('Error scrolling to element:', error);
+            }
+          }, 100);
+        }
+      }
+    } catch (error) {
+      console.error('Error in Portfolio hash navigation:', error);
     }
   }, []); // Empty dependency array means this runs once on component mount
 

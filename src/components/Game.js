@@ -76,12 +76,22 @@ const Game = () => {
       }
     };
 
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
+    // Only add event listeners in browser environments
+    if (typeof window !== 'undefined') {
+      window.addEventListener('keydown', handleKeyPress);
+      return () => window.removeEventListener('keydown', handleKeyPress);
+    }
+    return undefined;
   }, [handleInteraction]);
 
   useEffect(() => {
     if (!gameStarted || gameOver) return;
+
+    // Skip game loop in headless environments
+    if (typeof window === 'undefined' || process.env.REACT_APP_HEADLESS_BROWSER === 'true') {
+      console.log('Skipping game loop in headless environment');
+      return undefined;
+    }
 
     const gameLoop = setInterval(() => {
       setScore(prev => prev + 1);
@@ -113,28 +123,42 @@ const Game = () => {
           }))
           .filter(obstacle => obstacle.left > -10);
 
-        // Check for collisions
-        const character = document.querySelector('.character');
-        const characterBox = character?.getBoundingClientRect();
-
-        if (characterBox) {
-          for (const obstacle of newObstacles) {
-            const obstacleElement = document.querySelector(`[data-id="${obstacle.id}"]`);
-            const obstacleBox = obstacleElement?.getBoundingClientRect();
-            
-            if (obstacleBox && checkCollision(characterBox, obstacleBox)) {
-              setGameOver(true);
-              break;
-            }
-          }
-        }
-
         return newObstacles;
       });
     }, 16);
 
     return () => clearInterval(gameLoop);
-  }, [gameStarted, gameOver, obstacles, lastObstacleTime, checkCollision]);
+  }, [gameStarted, gameOver, obstacles, lastObstacleTime]);
+
+  useEffect(() => {
+    if (!gameStarted || gameOver) return;
+    
+    // Skip collision detection in headless environments
+    if (typeof window === 'undefined' || process.env.REACT_APP_HEADLESS_BROWSER === 'true') {
+      return;
+    }
+
+    const character = document.querySelector('.game-character');
+    if (!character) return;
+
+    const characterBox = character.getBoundingClientRect();
+    
+    const obstacleElements = document.querySelectorAll('.game-obstacle');
+    if (!obstacleElements.length) return;
+
+    let collision = false;
+    
+    obstacleElements.forEach(obstacle => {
+      const obstacleBox = obstacle.getBoundingClientRect();
+      if (checkCollision(characterBox, obstacleBox)) {
+        collision = true;
+      }
+    });
+
+    if (collision) {
+      setGameOver(true);
+    }
+  }, [gameStarted, gameOver, obstacles, isJumping, checkCollision]);
 
   return (
     <div 
@@ -143,14 +167,14 @@ const Game = () => {
       onClick={handleInteraction}
     >
       <div className="game-area">
-        <div className={`character ${isJumping ? 'jump' : ''}`}>
+        <div className={`game-character ${isJumping ? 'jump' : ''}`}>
           <img src={logo} alt="Character" style={{ width: '100%', height: '100%' }} />
         </div>
         {obstacles.map(obstacle => (
           <div
             key={obstacle.id}
             data-id={obstacle.id}
-            className="obstacle"
+            className="game-obstacle"
             style={{ left: `${obstacle.left}%` }}
           >
             {obstacle.letter}

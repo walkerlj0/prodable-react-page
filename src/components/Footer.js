@@ -6,9 +6,16 @@ import './Footer.css';
 function Footer() {
   // Function to smoothly scroll to the contact section
   const scrollWithOffset = (el) => {
-    const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
-    const yOffset = -80; // Adjust this value based on your header height
-    window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' }); 
+    try {
+      if (typeof window === 'undefined' || !el) {
+        return;
+      }
+      const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
+      const yOffset = -80; // Adjust this value based on your header height
+      window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' }); 
+    } catch (error) {
+      console.error('Error in scrollWithOffset:', error);
+    }
   };
 
   return (

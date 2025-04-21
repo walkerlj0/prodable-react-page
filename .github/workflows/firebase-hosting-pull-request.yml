@@ -26,6 +26,8 @@ jobs:
           echo "GENERATE_SOURCEMAP=false" >> .env
           echo "REACT_APP_CI_BUILD=true" >> .env
           echo "NODE_OPTIONS=--max-old-space-size=4096" >> .env
+          echo "REACT_APP_HEADLESS_BROWSER=true" >> .env
+          echo "BROWSER=none" >> .env
       - name: Build with additional debugging
         run: |
           export NODE_ENV=production
@@ -37,6 +39,10 @@ jobs:
             echo "Build failed, checking for problematic components..."
             # List all component files for reference
             find src -name "*.js" -type f | grep -v "test" | sort
+            # Check for window/document references that might cause issues
+            echo "Checking for potential window/document references causing issues:"
+            grep -r "window\." --include="*.js" src/ || echo "No direct window references found"
+            grep -r "document\." --include="*.js" src/ || echo "No direct document references found"
             # Exit with error to fail the workflow
             exit 1
           }
