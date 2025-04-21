@@ -215,6 +215,23 @@
   background: #fff;
 }
 
+.fallback-link {
+  margin-left: 8px;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.fallback-link a {
+  color: #777;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.fallback-link a:hover {
+  color: #555;
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .dark-section-content {
     grid-template-columns: 1fr;

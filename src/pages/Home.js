@@ -77,7 +77,7 @@ function Home() {
                   className="grid-image"
                 />
               </div>
-              <h3><Link to="https://dispatch.starlinglab.org/">Starling Lab Outreach</Link></h3>
+              <h3><a href="https://dispatch.starlinglab.org/" target="_blank" rel="noopener noreferrer">Starling Lab Outreach</a></h3>
               <p>
                 Etablished a blog, posts, a social media presence in-person and online workshops, 
                 wrote Case Studies for Starling Lab Fellowships, 
@@ -92,7 +92,7 @@ function Home() {
                   className="grid-image"
                 />
               </div>
-              <h3><Link to="https://www.impossiblecloudnetwork.com/">Impossible Cloud Network Litepaper</Link></h3>
+              <h3><a href="https://console.impossiblecloud.com/static/icn/Litepaper.pdf" target="_blank" rel="noopener noreferrer">Impossible Cloud Network Litepaper</a></h3>
               <p>
                 Helped translate and edit the original whitepaper into a clear and concise
                 published litepaper prior to the public token sale.

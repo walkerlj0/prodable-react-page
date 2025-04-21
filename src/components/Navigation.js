@@ -44,6 +44,7 @@ function Navigation() {
       <ul className={isMenuOpen ? 'active' : ''}>
         <li><Link to="/" onClick={scrollToTopAndCloseMenu}>Home</Link></li>
         <li><Link to="/portfolio" onClick={scrollToTopAndCloseMenu}>Portfolio</Link></li>
+        <li><Link to="/portfolio#lindsay" onClick={() => setIsMenuOpen(false)}>About Lindsay</Link></li>
         <li><Link to="/services" onClick={scrollToTopAndCloseMenu}>Services</Link></li>
         <li><Link to="/demos" onClick={scrollToTopAndCloseMenu}>Demos</Link></li>
       </ul>

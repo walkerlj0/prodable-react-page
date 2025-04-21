@@ -31,26 +31,59 @@
 .profile-container {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  margin-bottom: 3rem;
+  min-height: 300px;
+}
+
+.profile-image-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+  position: relative;
+  height: 100%;
+  padding-top: 40px;
+  padding-bottom: 60px;
 }
 
 .profile-image-container {
-  flex: 0 0 20%; /* Takes up 20% of the container width */
-  display: flex;
-  justify-content: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .profile-image {
   width: 100%;
-  aspect-ratio: 1/1;
+  height: 100%;
   object-fit: cover;
-  border-radius: 50%; /* Creates circular image */
+  border-radius: 50%;
   border: 4px solid #fff;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
+.profile-social-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.profile-social-icon {
+  margin: 0 8px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.profile-social-icon:hover {
+  transform: scale(1.1);
+}
+
 .profile-content {
   flex: 1;
+  padding: 0 20px;
 }
 
 .profile-name {
@@ -58,6 +91,35 @@
   margin-bottom: 0.5rem;
   color: #333;
   font-family: 'Special Elite', cursive !important;
+}
+
+.profile-name-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.profile-name-link:hover {
+  color: #555;
+}
+
+.profile-name-link:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #555;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.profile-name-link:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 .profile-title {
@@ -88,7 +150,6 @@
   }
   
   .profile-image-container {
-    flex: 0 0 60%;
     margin-bottom: 2rem;
   }
 }
@@ -138,13 +199,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
-  transform-origin: center;
 }
 
-/* Zoom effect for text section on hover */
 .portfolio-section-alt:hover .portfolio-section-text {
-  transform: scale(1.02);
+  transform: none;
 }
 
 /* Title row with icon */
@@ -181,13 +239,12 @@
   background: #f7fafd;
   min-height: 390px; /* Increased by about 40% from 280px */
   padding: 3.5rem;
-  transition: transform 0.5s ease;
+  transition: transform 0.3s ease;
   transform-origin: center;
 }
 
-/* Zoom effect for image section on hover */
 .portfolio-section-alt:hover .portfolio-section-image {
-  transform: scale(1.02);
+  transform: none;
 }
 
 .portfolio-section-image img {
@@ -196,13 +253,12 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.09);
   object-fit: contain;
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Additional zoom effect for the image itself */
 .portfolio-section-alt:hover .portfolio-section-image img {
-  transform: scale(1.03);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
 }
 
 .portfolio-image-placeholder {
@@ -216,6 +272,52 @@
   color: #aaa;
   font-size: 1.2rem;
   font-style: italic;
+}
+
+.portfolio-image-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.portfolio-image-caption {
+  margin-top: 12px;
+  font-style: italic;
+  color: #777;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.portfolio-image-caption a {
+  color: #555;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.portfolio-image-caption a:hover {
+  color: #333;
+}
+
+.portfolio-embed-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.portfolio-embed-content iframe {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.portfolio-section-alt:hover .portfolio-embed-content iframe {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
 }
 
 /* Portfolio header styling */
