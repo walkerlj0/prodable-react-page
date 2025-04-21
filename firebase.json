@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "staging-prodable-react-page",
     "public": "build",
     "ignore": [
       "firebase.json",

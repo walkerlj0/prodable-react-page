@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Staging Site
+When PRs are merged to main, or pushes are made to main, updates can be seen here: [https://staging-prodable-react-page.web.app](https://staging-prodable-react-page.web.app)
+
+Project Console: https://console.firebase.google.com/project/prodable-react-page/overview
+
 ## Available Scripts
 
 In the project directory, you can run:

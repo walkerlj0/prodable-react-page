@@ -1,5 +1,19 @@
 {
   "projects": {
-    "default": "prodable-react-page"
-  }
+    "default": "prodable-react-page",
+    "staging": "prodable-react-page"
+  },
+  "targets": {
+    "prodable-react-page": {
+      "hosting": {
+        "production": [
+          "prodable-react-page"
+        ],
+        "staging": [
+          "staging-prodable-react-page"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
