@@ -30,8 +30,25 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run eject`
-
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+## Deploy to Firebase
+With the appropriate keys/ access you can deploy to firebase.
+
+**Firebase Project Console:** https://console.firebase.google.com/u/0/project/prodable-react-page/overview
+
+Deploy with Firebase
+### `firebase deploy`
+
+# List your Firebase projects
+firebase projects:list
+
+# Switch between projects
+firebase use project-name
+
+# Or use project aliases
+firebase use --add  # To create an alias
+firebase use production  # To switch to production alias
 
 If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
