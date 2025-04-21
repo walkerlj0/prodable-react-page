@@ -99,7 +99,7 @@ function Portfolio() {
             <h3 className="profile-title">Technical Enablement, Program, and Product Management</h3>
             <div className="special-font profile-description">
               <p>
-                With expertise spanning data analytics, many programming tools and languages, decentralized systems, AI platforms, and educational technology, 
+                With expertise spanning data analytics, several programming tools and languages, decentralized systems, AI platforms, and educational technology, 
                 Lindsay excels at working with cross-functional teams to successfully deliver ambitious projects.
               </p>
             </div>
