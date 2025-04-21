@@ -6,11 +6,11 @@
   "targets": {
     "prodable-react-page": {
       "hosting": {
-        "production": [
-          "prodable-react-page"
-        ],
         "staging": [
           "staging-prodable-react-page"
+        ],
+        "prodable-react-page": [
+          "prodable-react-page"
         ]
       }
     }
