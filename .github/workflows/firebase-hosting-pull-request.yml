@@ -24,9 +24,24 @@ jobs:
           echo "DISABLE_ESLINT_PLUGIN=true" > .env
           echo "SKIP_PREFLIGHT_CHECK=true" >> .env
           echo "GENERATE_SOURCEMAP=false" >> .env
-      - name: Build
-        run: CI=false npm run build
+          echo "REACT_APP_CI_BUILD=true" >> .env
+          echo "NODE_OPTIONS=--max-old-space-size=4096" >> .env
+      - name: Build with additional debugging
+        run: |
+          export NODE_ENV=production
+          export CI=false
+          # Add more verbose error output
+          export DEBUG=true
+          # Try to build with more detailed logging
+          npm run build || {
+            echo "Build failed, checking for problematic components..."
+            # List all component files for reference
+            find src -name "*.js" -type f | grep -v "test" | sort
+            # Exit with error to fail the workflow
+            exit 1
+          }
       - name: Deploy to Firebase
+        if: success()
         run: |
           npm install -g firebase-tools@12.4.7
           firebase deploy --only hosting --project prodable-react-page --token "${{ secrets.FIREBASE_TOKEN }}" --non-interactive
