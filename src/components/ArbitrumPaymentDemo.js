@@ -210,32 +210,69 @@ function ArbitrumPaymentDemo() {
       setStatus('Checking token balance...');
       
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const tokenContract = new ethers.Contract(tokenAddress, ERC20_ABI, provider);
       
-      // Get token info
+      // First, check if there's contract code at this address
+      const code = await provider.getCode(tokenAddress);
+      if (code === '0x') {
+        setStatus(`Error: No contract found at address ${tokenAddress}. Please check the address and network.`);
+        setIsLoading(false);
+        return;
+      }
+      
+      // Try a simpler method call first to check if the contract responds
       try {
-        const symbol = await tokenContract.symbol();
-        const name = await tokenContract.name();
-        const decimals = await tokenContract.decimals();
+        // Create minimal interface just for detection
+        const minimalABI = ["function balanceOf(address) view returns (uint256)"];
+        const minimalContract = new ethers.Contract(tokenAddress, minimalABI, provider);
         
-        setTokenSymbol(symbol);
-        setTokenName(name);
+        // Try calling balanceOf with the connected account
+        await minimalContract.balanceOf(account);
         
-        // Get balance
-        const balanceWei = await tokenContract.balanceOf(account);
-        const balanceFormatted = ethers.utils.formatUnits(balanceWei, decimals);
+        // If that worked, proceed with the full contract check
+        const tokenContract = new ethers.Contract(tokenAddress, ERC20_ABI, provider);
         
-        setBalance(`${balanceFormatted} ${symbol}`);
-        setStatus(`Successfully retrieved ${name} (${symbol}) balance`);
-      } catch (err) {
-        setStatus('Error: This does not appear to be a valid ERC20 token');
-        console.error("Token contract error:", err);
+        // Get token info
+        try {
+          console.log("Attempting to get symbol...");
+          const symbol = await tokenContract.symbol();
+          console.log("Symbol:", symbol);
+          
+          console.log("Attempting to get name...");
+          const name = await tokenContract.name();
+          console.log("Name:", name);
+          
+          console.log("Attempting to get decimals...");
+          const decimals = await tokenContract.decimals();
+          console.log("Decimals:", decimals);
+          
+          setTokenSymbol(symbol);
+          setTokenName(name);
+          
+          // Get balance
+          const balanceWei = await tokenContract.balanceOf(account);
+          const balanceFormatted = ethers.utils.formatUnits(balanceWei, decimals);
+          
+          setBalance(`${balanceFormatted} ${symbol}`);
+          setStatus(`Successfully retrieved ${name} (${symbol}) balance`);
+        } catch (err) {
+          console.error("Token contract error:", err);
+          
+          // Try to be more specific about the error
+          if (err.code === 'CALL_EXCEPTION') {
+            setStatus(`Error: This contract doesn't implement the ERC20 standard correctly. Function call failed: ${err.method || 'unknown method'}`);
+          } else {
+            setStatus('Error: This does not appear to be a valid ERC20 token');
+          }
+        }
+      } catch (contractError) {
+        console.error("Contract interaction error:", contractError);
+        setStatus(`Error: This doesn't appear to be an ERC20 token contract. Make sure you're on Arbitrum Sepolia network and using a valid token address.`);
       }
       
       setIsLoading(false);
     } catch (error) {
       console.error("Error checking token balance:", error);
-      setStatus('Error checking token balance. Make sure the address is correct.');
+      setStatus('Error checking token balance. Make sure the address is correct and you are on Arbitrum Sepolia network.');
       setIsLoading(false);
     }
   };
@@ -332,13 +369,24 @@ function ArbitrumPaymentDemo() {
                   value={tokenAddress} 
                   onChange={(e) => setTokenAddress(e.target.value)} 
                 />
-                <button 
-                  className="secondary-button" 
-                  onClick={checkTokenBalance} 
-                  disabled={isLoading || !tokenAddress}
-                >
-                  Check Balance
-                </button>
+                <div className="button-row">
+                  <button 
+                    className="secondary-button" 
+                    onClick={checkTokenBalance} 
+                    disabled={isLoading || !tokenAddress}
+                  >
+                    Check Balance
+                  </button>
+                  <button 
+                    className="secondary-button" 
+                    onClick={() => {
+                      // AAVE test token on Arbitrum Sepolia
+                      setTokenAddress('0xCcbE39FF4F1021B7208e5Da74F010686B15DC8a8');
+                    }}
+                  >
+                    Use Test Token
+                  </button>
+                </div>
               </div>
               
               <div className="form-group">
