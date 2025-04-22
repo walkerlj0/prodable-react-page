@@ -238,6 +238,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   margin-top: 2rem;
+  max-width: 100%;
 }
 
 .contact-info {
@@ -273,10 +274,12 @@
 .contact-form {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .form-group {
   margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 .form-group label {
@@ -293,6 +296,8 @@
   border-radius: 6px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
+  box-sizing: border-box; /* This ensures padding is included in the width */
+  max-width: 100%;
 }
 
 .form-group input:focus,
@@ -330,15 +335,32 @@
   
   .contact-container {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
   
   .contact-form {
-    margin-top: 2rem;
+    margin-top: 1rem;
+  }
+  
+  .service-section {
+    padding: 3rem 2rem;
+    max-width: 90%;
   }
 }
 
 @media (max-width: 768px) {
   .pricing-container {
     grid-template-columns: 1fr;
+  }
+  
+  .service-section {
+    padding: 2rem 1.5rem;
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-section {
+    padding: 2rem 1rem;
   }
 }

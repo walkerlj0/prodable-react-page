@@ -2,13 +2,42 @@ import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import './ArbitrumPaymentDemo.css';
 
-// Simple ERC20 ABI for transfer function
+// Comprehensive ERC20 ABI with additional functions for better interaction
 const ERC20_ABI = [
-  "function balanceOf(address owner) view returns (uint256)",
-  "function transfer(address to, uint256 amount) returns (bool)",
+  // Read-only functions
+  "function name() view returns (string)",
+  "function symbol() view returns (string)",
   "function decimals() view returns (uint8)",
-  "function symbol() view returns (string)"
+  "function totalSupply() view returns (uint256)",
+  "function balanceOf(address owner) view returns (uint256)",
+  "function allowance(address owner, address spender) view returns (uint256)",
+  
+  // Write functions
+  "function transfer(address to, uint256 amount) returns (bool)",
+  "function approve(address spender, uint256 amount) returns (bool)",
+  "function transferFrom(address from, address to, uint256 amount) returns (bool)",
+  
+  // Events
+  "event Transfer(address indexed from, address indexed to, uint256 value)",
+  "event Approval(address indexed owner, address indexed spender, uint256 value)"
 ];
+
+// Arbitrum Sepolia Network parameters
+const ARBITRUM_SEPOLIA = {
+  chainId: '0x66eee', // 421614 in decimal
+  chainName: 'Arbitrum Sepolia',
+  nativeCurrency: {
+    name: 'Ethereum',
+    symbol: 'ETH',
+    decimals: 18,
+  },
+  rpcUrls: [
+    'https://sepolia-rollup.arbitrum.io/rpc',
+    'https://arbitrum-sepolia.blockpi.network/v1/rpc/public',
+    'https://arb-sepolia.g.alchemy.com/v2/demo'
+  ],
+  blockExplorerUrls: ['https://sepolia.arbiscan.io/'],
+};
 
 function ArbitrumPaymentDemo() {
   const [account, setAccount] = useState('');
@@ -17,6 +46,7 @@ function ArbitrumPaymentDemo() {
   const [amount, setAmount] = useState('');
   const [tokenAddress, setTokenAddress] = useState('');
   const [tokenSymbol, setTokenSymbol] = useState('');
+  const [tokenName, setTokenName] = useState('');
   const [status, setStatus] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
@@ -93,8 +123,8 @@ function ArbitrumPaymentDemo() {
       if (typeof window !== 'undefined' && window.ethereum) {
         const chainId = await window.ethereum.request({ method: 'eth_chainId' });
         
-        // Arbitrum Sepolia chainId is 0x66eee
-        if (chainId === '0x66eee') {
+        // Arbitrum Sepolia chainId is 0x66eee (421614 in decimal)
+        if (chainId === ARBITRUM_SEPOLIA.chainId) {
           setNetwork('Arbitrum Sepolia');
         } else {
           setNetwork('Not on Arbitrum Sepolia');
@@ -123,14 +153,14 @@ function ArbitrumPaymentDemo() {
       
       // Check if on Arbitrum Sepolia
       const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-      if (chainId !== '0x66eee') {
+      if (chainId !== ARBITRUM_SEPOLIA.chainId) {
         setStatus('Please switch to Arbitrum Sepolia testnet');
         
         try {
           // Try to switch to Arbitrum Sepolia
           await window.ethereum.request({
             method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x66eee' }],
+            params: [{ chainId: ARBITRUM_SEPOLIA.chainId }],
           });
         } catch (switchError) {
           // This error code indicates that the chain has not been added to MetaMask
@@ -138,23 +168,14 @@ function ArbitrumPaymentDemo() {
             try {
               await window.ethereum.request({
                 method: 'wallet_addEthereumChain',
-                params: [
-                  {
-                    chainId: '0x66eee',
-                    chainName: 'Arbitrum Sepolia',
-                    nativeCurrency: {
-                      name: 'ETH',
-                      symbol: 'ETH',
-                      decimals: 18,
-                    },
-                    rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
-                    blockExplorerUrls: ['https://sepolia.arbiscan.io/'],
-                  },
-                ],
+                params: [ARBITRUM_SEPOLIA],
               });
             } catch (addError) {
               setStatus('Failed to add Arbitrum Sepolia network');
+              console.error("Error adding network:", addError);
             }
+          } else {
+            console.error("Error switching network:", switchError);
           }
         }
       }
@@ -191,17 +212,26 @@ function ArbitrumPaymentDemo() {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const tokenContract = new ethers.Contract(tokenAddress, ERC20_ABI, provider);
       
-      // Get token symbol and decimals
-      const symbol = await tokenContract.symbol();
-      const decimals = await tokenContract.decimals();
-      setTokenSymbol(symbol);
+      // Get token info
+      try {
+        const symbol = await tokenContract.symbol();
+        const name = await tokenContract.name();
+        const decimals = await tokenContract.decimals();
+        
+        setTokenSymbol(symbol);
+        setTokenName(name);
+        
+        // Get balance
+        const balanceWei = await tokenContract.balanceOf(account);
+        const balanceFormatted = ethers.utils.formatUnits(balanceWei, decimals);
+        
+        setBalance(`${balanceFormatted} ${symbol}`);
+        setStatus(`Successfully retrieved ${name} (${symbol}) balance`);
+      } catch (err) {
+        setStatus('Error: This does not appear to be a valid ERC20 token');
+        console.error("Token contract error:", err);
+      }
       
-      // Get balance
-      const balanceWei = await tokenContract.balanceOf(account);
-      const balanceFormatted = ethers.utils.formatUnits(balanceWei, decimals);
-      
-      setBalance(`${balanceFormatted} ${symbol}`);
-      setStatus(`Successfully retrieved ${symbol} balance`);
       setIsLoading(false);
     } catch (error) {
       console.error("Error checking token balance:", error);
@@ -291,6 +321,7 @@ function ArbitrumPaymentDemo() {
               <div className="account-info">
                 <p>Connected: {account.substring(0, 6)}...{account.substring(38)}</p>
                 {balance && <p>Balance: {balance}</p>}
+                {tokenName && <p>Token: {tokenName}</p>}
               </div>
               
               <div className="form-group">
@@ -352,6 +383,16 @@ function ArbitrumPaymentDemo() {
               rel="noopener noreferrer"
             >
               Get Arbitrum Sepolia ETH
+            </a>
+          </p>
+          <p>
+            <a 
+              href={`https://sepolia.arbiscan.io/address/${account}`} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ display: account ? 'inline-block' : 'none' }}
+            >
+              View account on Arbiscan
             </a>
           </p>
         </div>
