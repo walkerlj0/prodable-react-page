@@ -7,7 +7,47 @@ import starlinglabdispatch from '../assets/dispatch.png';
 import Footer from '../components/Footer';
 import './Home.css';
 
+// Check if we're in a browser environment
+const isBrowser = typeof window !== 'undefined' && 
+                 typeof document !== 'undefined' && 
+                 !process.env.REACT_APP_HEADLESS_BROWSER;
+
 function Home() {
+  // Create a simplified version of the content for headless environments
+  if (!isBrowser) {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={titleLogo} className="App-logo" alt="Prodable" />
+          <h2>A Technical Consulting Agency</h2>
+          <div className="special-font intro-text">
+            <p>
+              Prodable is a consulting agency made up of experienced, native english-speaking engineers
+              that specialize in technical documentation.
+            </p>
+          </div>
+          <Link to="/portfolio" className="App-link special-font">
+            See Our Work
+          </Link>
+        </header>
+        <section className="dark-section">
+          <div className="dark-section-content">
+            <div className="dark-section-text">
+              <h2>Our Expertise</h2>
+              <p>
+                We are equipped to help emerging and existing tech startups create
+                the training, documentation, messaging, curriculum, and enablement materials
+                they need for their partners, users, and customers.
+              </p>
+            </div>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Full version for browser environments
   return (
     <ParallaxProvider>
       <div className="App">

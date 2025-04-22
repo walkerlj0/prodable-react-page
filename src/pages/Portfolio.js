@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './Portfolio.css';
 import prodableLogo from '../assets/prodable-logo-noback.svg';
 import prodableP from '../assets/prodable-p.svg';
@@ -117,6 +117,16 @@ function PortfolioSection({ icon, title, text, image, reverse, darkBg, link, cap
 }
 
 function Portfolio() {
+  // Create a ref object to store refs to sections that might be targeted by hash links
+  const sectionRefs = useRef({});
+
+  // Register a section ref
+  const registerSectionRef = useCallback((element, id) => {
+    if (element && id) {
+      sectionRefs.current[id] = element;
+    }
+  }, []);
+
   useEffect(() => {
     try {
       // Skip in headless environments
@@ -126,14 +136,17 @@ function Portfolio() {
       
       // Check if there's a hash in the URL
       if (window.location.hash) {
-        // Get the element with the ID matching the hash
+        // Get the id from the hash
         const id = window.location.hash.substring(1);
-        const element = document.getElementById(id);
+        
+        // Access the element using our ref instead of direct DOM query
+        const element = sectionRefs.current[id];
         
         // If the element exists, scroll to it with a slight delay to ensure rendering
         if (element) {
           setTimeout(() => {
             try {
+              // Use scrollIntoView on the element from our ref
               element.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } catch (error) {
               console.error('Error scrolling to element:', error);
@@ -160,7 +173,11 @@ function Portfolio() {
       </header>
 
       {/* Profile Section */}
-      <section id="lindsay" className="profile-section">
+      <section 
+        id="lindsay" 
+        className="profile-section"
+        ref={(element) => registerSectionRef(element, "lindsay")}
+      >
         <div className="profile-container">
           <div className="profile-image-wrapper">
             <div className="profile-image-container">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import logo from '../assets/prodable-logo-noback.svg';
 import './Game.css';
 
@@ -24,6 +24,10 @@ const Game = () => {
   const [obstacles, setObstacles] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
   const [lastObstacleTime, setLastObstacleTime] = useState(0);
+  
+  // Add refs for collision detection
+  const characterRef = useRef(null);
+  const obstaclesRef = useRef({});
 
   const jump = useCallback(() => {
     if (!isJumping && gameStarted && !gameOver) {
@@ -138,20 +142,26 @@ const Game = () => {
       return;
     }
 
-    const character = document.querySelector('.game-character');
+    // Use refs instead of direct DOM queries
+    const character = characterRef.current;
     if (!character) return;
 
     const characterBox = character.getBoundingClientRect();
     
-    const obstacleElements = document.querySelectorAll('.game-obstacle');
-    if (!obstacleElements.length) return;
-
+    // Check if we have any obstacles
+    const obstacleRefs = obstaclesRef.current;
+    if (!obstacleRefs || Object.keys(obstacleRefs).length === 0) return;
+    
     let collision = false;
     
-    obstacleElements.forEach(obstacle => {
-      const obstacleBox = obstacle.getBoundingClientRect();
-      if (checkCollision(characterBox, obstacleBox)) {
-        collision = true;
+    // Check each obstacle using the refs instead of querying the DOM
+    obstacles.forEach(obstacle => {
+      const obstacleElement = obstacleRefs[obstacle.id];
+      if (obstacleElement) {
+        const obstacleBox = obstacleElement.getBoundingClientRect();
+        if (checkCollision(characterBox, obstacleBox)) {
+          collision = true;
+        }
       }
     });
 
@@ -160,6 +170,15 @@ const Game = () => {
     }
   }, [gameStarted, gameOver, obstacles, isJumping, checkCollision]);
 
+  // Function to store obstacle refs
+  const setObstacleRef = useCallback((element, id) => {
+    if (element) {
+      obstaclesRef.current[id] = element;
+    } else {
+      delete obstaclesRef.current[id];
+    }
+  }, []);
+
   return (
     <div 
       className="game-container"
@@ -167,12 +186,16 @@ const Game = () => {
       onClick={handleInteraction}
     >
       <div className="game-area">
-        <div className={`game-character ${isJumping ? 'jump' : ''}`}>
+        <div 
+          ref={characterRef}
+          className={`game-character ${isJumping ? 'jump' : ''}`}
+        >
           <img src={logo} alt="Character" style={{ width: '100%', height: '100%' }} />
         </div>
         {obstacles.map(obstacle => (
           <div
             key={obstacle.id}
+            ref={(element) => setObstacleRef(element, obstacle.id)}
             data-id={obstacle.id}
             className="game-obstacle"
             style={{ left: `${obstacle.left}%` }}

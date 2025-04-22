@@ -1,39 +1,58 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Footer from '../components/Footer';
 import './Services.css';
+
+// Check if we're in a browser environment
+const isBrowser = typeof window !== 'undefined' && 
+                  typeof document !== 'undefined' && 
+                  !process.env.REACT_APP_HEADLESS_BROWSER;
 
 // Animated header logic
 const lines = ["S ervices"];
 function AnimatedServicesHeader() {
   const [displayed, setDisplayed] = useState([""]);
+  
   useEffect(() => {
+    // Skip animation in headless environments
+    if (!isBrowser) {
+      setDisplayed(lines); // Just display the full text immediately
+      return;
+    }
+    
     let currentLine = 0;
     let currentChar = 0;
     const interval = setInterval(() => {
-      if (
-        currentLine >= lines.length ||
-        currentChar >= (lines[currentLine]?.length || 0)
-      ) {
-        clearInterval(interval);
-        return;
-      }
-      setDisplayed(prev => {
-        if (currentLine >= lines.length) return prev;
-        const newDisplayed = [...prev];
-        if (!newDisplayed[currentLine]) newDisplayed[currentLine] = "";
-        if (currentChar < lines[currentLine].length) {
-          newDisplayed[currentLine] += lines[currentLine][currentChar];
+      try {
+        if (
+          currentLine >= lines.length ||
+          currentChar >= (lines[currentLine]?.length || 0)
+        ) {
+          clearInterval(interval);
+          return;
         }
-        return newDisplayed;
-      });
-      currentChar++;
-      if (currentChar === lines[currentLine].length) {
-        currentLine++;
-        currentChar = 0;
+        setDisplayed(prev => {
+          if (currentLine >= lines.length) return prev;
+          const newDisplayed = [...prev];
+          if (!newDisplayed[currentLine]) newDisplayed[currentLine] = "";
+          if (currentChar < lines[currentLine].length) {
+            newDisplayed[currentLine] += lines[currentLine][currentChar];
+          }
+          return newDisplayed;
+        });
+        currentChar++;
+        if (currentChar === lines[currentLine].length) {
+          currentLine++;
+          currentChar = 0;
+        }
+      } catch (error) {
+        console.error('Error in animated header:', error);
+        clearInterval(interval);
+        setDisplayed(lines); // Fallback to displaying full text
       }
     }, 100);
     return () => clearInterval(interval);
   }, []);
+  
   return (
     <h1 className="services-animated-header">
       {displayed.map((line, idx) => (
@@ -44,11 +63,15 @@ function AnimatedServicesHeader() {
 }
 
 function Services() {
-  const handleSubmit = (e) => {
+  // Use useCallback for event handlers
+  const handleSubmit = useCallback((e) => {
+    // Skip in headless environments
+    if (!isBrowser) return;
+    
     e.preventDefault();
     // Form submission logic would go here
     alert('Thank you for your message! We will get back to you soon.');
-  };
+  }, []);
 
   return (
     <div className="page">
