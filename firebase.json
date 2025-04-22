@@ -16,7 +16,7 @@
       ]
     },
     {
-      "target": "staging",
+      "target": "staging-prodable-react-page",
       "public": "build",
       "ignore": [
         "firebase.json",

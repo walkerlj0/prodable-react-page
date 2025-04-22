@@ -42,12 +42,10 @@ jobs:
       - name: Build
         run: npm run build:simple
       - name: Deploy to Firebase Staging
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
           npm install -g firebase-tools
           firebase use prodable-react-page
-          firebase deploy --only hosting:staging-prodable-react-page --token $FIREBASE_TOKEN --non-interactive
+          firebase deploy --only hosting:staging-prodable-react-page --token "${{ secrets.FIREBASE_TOKEN }}"
       - name: Comment on PR with staging URL
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
@@ -71,9 +69,7 @@ jobs:
       - name: Build
         run: npm run build:simple
       - name: Deploy to Firebase Production
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
           npm install -g firebase-tools
           firebase use prodable-react-page
-          firebase deploy --only hosting:prodable-react-page --token $FIREBASE_TOKEN --non-interactive
+          firebase deploy --only hosting:prodable-react-page --token "${{ secrets.FIREBASE_TOKEN }}"
