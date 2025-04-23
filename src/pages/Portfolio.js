@@ -13,6 +13,7 @@ import youtubeIcon from '../assets/youtube-icon.png';
 import plLaunchpad from '../assets/pl-launchpad.png';
 import starlingLabDispatch from '../assets/starling-lab-dispatch.png';
 import pMing from '../assets/p-ming.png';
+import linkedinLogo from '../assets/linkedin-logo.png';
 
 // Animated header logic
 const lines = ["P ortfolio"];
@@ -200,6 +201,14 @@ function Portfolio() {
                   onError={(e) => {
                     e.target.src = "https://firebasestorage.googleapis.com/v0/b/prodable-react-page.appspot.com/o/github.png?alt=media";
                   }}
+                />
+              </a>
+              <a href="https://www.linkedin.com/in/lindsayjowalker/" target="_blank" rel="noopener noreferrer">
+                <img 
+                  src={process.env.NODE_ENV === 'development' ? require('../assets/linkedin-logo.png') : 'https://storage.googleapis.com/prodable-react-page.appspot.com/linkedin-logo.png'} 
+                  alt="LinkedIn Profile" 
+                  className="profile-social-icon" 
+                  style={{ height: '25px', marginLeft: '10px' }}
                 />
               </a>
               <a href="https://app.ens.domains/lindsayj.eth" target="_blank" rel="noopener noreferrer">

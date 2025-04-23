@@ -24,6 +24,14 @@ function Footer() {
         <div className="footer-section">
           <h3>Prodable</h3>
           <p><i>Bridging highly technical teams and functional audiences</i></p>
+          <a href="https://github.com/walkerlj0/prodable-react-page" target="_blank" rel="noopener noreferrer">
+            <img 
+              src={process.env.NODE_ENV === 'development' ? require('../assets/github-white.png') : 'https://storage.googleapis.com/prodable-react-page.appspot.com/github-white.png'} 
+              alt="GitHub Repository" 
+              className="footer-social-icon"
+              style={{ height: '35px', marginTop: '10px' }}
+            />
+          </a>
         </div>
         <div className="footer-section">
           <h4>Quick Links</h4>
