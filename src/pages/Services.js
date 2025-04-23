@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import ReactGA from 'react-ga4';
+import emailjs from '@emailjs/browser';
 import Footer from '../components/Footer';
 import './Services.css';
 
@@ -64,12 +65,16 @@ function AnimatedServicesHeader() {
 }
 
 function Services() {
+  const [formStatus, setFormStatus] = useState('');
+  const formRef = useRef();
+  
   // Use useCallback for event handlers
   const handleSubmit = useCallback((e) => {
     // Skip in headless environments
     if (!isBrowser) return;
     
     e.preventDefault();
+    setFormStatus('Sending...');
     
     // Track form submission event
     ReactGA.event({
@@ -79,8 +84,48 @@ function Services() {
     });
     console.log('[Analytics] Tracked contact form submission');
     
-    // Form submission logic would go here
-    alert('Thank you for your message! We will get back to you soon.');
+    // Send email using EmailJS
+    // Replace these values with your actual EmailJS service, template, and user IDs
+    emailjs.sendForm(
+      'service_9ue8dfh',
+      'template_ho39bfs',
+      formRef.current,
+      'cMAwUroj7SZsWuqPb'
+    )
+      .then((result) => {
+        console.log('Email successfully sent!', result.text);
+        setFormStatus('Message sent! We will get back to you soon.');
+        
+        // Track successful email send
+        ReactGA.event({
+          category: 'Engagement',
+          action: 'EmailSent',
+          label: 'Contact Form Success'
+        });
+        
+        // Reset the form
+        formRef.current.reset();
+        
+        // Clear success message after 5 seconds
+        setTimeout(() => {
+          setFormStatus('');
+        }, 5000);
+      }, (error) => {
+        console.error('Failed to send email:', error.text);
+        setFormStatus('Failed to send message. Please try again or email us directly.');
+        
+        // Track failed email send
+        ReactGA.event({
+          category: 'Error',
+          action: 'EmailFailed',
+          label: 'Contact Form Error'
+        });
+        
+        // Clear error message after 5 seconds
+        setTimeout(() => {
+          setFormStatus('');
+        }, 5000);
+      });
   }, []);
 
   return (
@@ -178,14 +223,19 @@ function Services() {
             </div>
           </div>
           <div className="contact-form">
-            <form onSubmit={handleSubmit}>
+            {formStatus && (
+              <div className={`form-status ${formStatus.includes('Failed') ? 'error' : 'success'}`}>
+                {formStatus}
+              </div>
+            )}
+            <form ref={formRef} onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" required />
+                <label htmlFor="user_name">Name</label>
+                <input type="text" id="user_name" name="user_name" required />
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" required />
+                <label htmlFor="user_email">Email</label>
+                <input type="email" id="user_email" name="user_email" required />
               </div>
               <div className="form-group">
                 <label htmlFor="subject">Subject</label>

@@ -327,6 +327,26 @@
   background: #3e6b6b;
 }
 
+/* New styles for form status messages */
+.form-status {
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.form-status.success {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+  border: 1px solid #27ae60;
+}
+
+.form-status.error {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
 /* Responsive styles */
 @media (max-width: 900px) {
   .pricing-container {
