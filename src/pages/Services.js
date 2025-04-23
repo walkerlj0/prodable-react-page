@@ -85,11 +85,28 @@ function Services() {
     console.log('[Analytics] Tracked contact form submission');
     
     // Send email using EmailJS
-    // Replace these values with your actual EmailJS service, template, and user IDs
-    emailjs.sendForm(
-      'service_9ue8dfh',
+    console.log('Sending email with EmailJS...');
+    console.log('Form data:', {
+      name: formRef.current.user_name.value,
+      email: formRef.current.user_email.value,
+      subject: formRef.current.subject.value,
+      message: formRef.current.message.value
+    });
+    
+    // Create template parameters with reply_to parameter
+    const templateParams = {
+      from_name: formRef.current.user_name.value,
+      from_email: formRef.current.user_email.value,
+      subject: formRef.current.subject.value,
+      message: formRef.current.message.value,
+      reply_to: formRef.current.user_email.value, // Set reply-to as the submitter's email
+    };
+    
+    // Send email using EmailJS
+    emailjs.send(
+      'default_service',
       'template_ho39bfs',
-      formRef.current,
+      templateParams,
       'cMAwUroj7SZsWuqPb'
     )
       .then((result) => {

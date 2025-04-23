@@ -4,10 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ReactGA from 'react-ga4';
+import emailjs from '@emailjs/browser';
 
 // Initialize Google Analytics
 const MEASUREMENT_ID = 'G-6R8JZJ1XJ2';
 ReactGA.initialize(MEASUREMENT_ID);
+
+// Initialize EmailJS with your public key
+emailjs.init('cMAwUroj7SZsWuqPb');
 
 // Define a global browser environment check that can be reused across components
 const isBrowser = typeof window !== 'undefined' && 
