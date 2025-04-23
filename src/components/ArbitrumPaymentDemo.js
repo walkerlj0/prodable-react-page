@@ -726,7 +726,7 @@ function ArbitrumPaymentDemo() {
       <div className="arbitrum-footer">
         <p>This demo works on Arbitrum Sepolia testnet. You'll need test tokens to try it.</p>
         <p>
-          <a href="https://sepolia-faucet.arbitrum.io/" target="_blank" rel="noopener noreferrer">
+          <a href="https://faucets.chain.link/arbitrum-sepolia" target="_blank" rel="noopener noreferrer">
             Get Sepolia ETH from Arbitrum Faucet
           </a>
         </p>
