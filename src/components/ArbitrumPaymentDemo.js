@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import './ArbitrumPaymentDemo.css';
+import ReactGA from 'react-ga4';
 
 // Comprehensive ERC20 ABI with additional functions for better interaction
 const ERC20_ABI = [
@@ -160,9 +161,20 @@ function ArbitrumPaymentDemo() {
 
       setIsLoading(true);
       // Request account access
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const accounts = await window.ethereum.request({ 
+        method: 'eth_requestAccounts',
+        params: [{ eth_accounts: { force: true } }]  // Force account selection dialog
+      });
       setAccount(accounts[0]);
       setIsConnected(true);
+      
+      // Track wallet connection event
+      ReactGA.event({
+        category: 'Wallet',
+        action: 'Connect',
+        label: 'MetaMask'
+      });
+      console.log("[Analytics] Tracked wallet connection event");
       
       // Check if on Arbitrum Sepolia
       const chainId = await window.ethereum.request({ method: 'eth_chainId' });
@@ -203,16 +215,54 @@ function ArbitrumPaymentDemo() {
   };
 
   // Disconnect from MetaMask
-  const disconnectWallet = () => {
-    // Reset all state related to the connection
-    setAccount('');
-    setIsConnected(false);
-    setBalance('');
-    setTokenName('');
-    setTokenSymbol('');
-    setStatus('Disconnected from wallet');
-    
-    console.log("Disconnected from wallet");
+  
+  const disconnectWallet = async () => {
+    try {
+      // Clear the state
+      setAccount('');
+      setIsConnected(false);
+      setBalance('');
+      setTokenName('');
+      setTokenSymbol('');
+      
+      // Track wallet disconnection event
+      ReactGA.event({
+        category: 'Wallet',
+        action: 'Disconnect',
+        label: 'MetaMask'
+      });
+      console.log("[Analytics] Tracked wallet disconnection event");
+      
+      // For MetaMask, we need to handle this differently since there's no direct "disconnect" method
+      if (window.ethereum && window.ethereum.isMetaMask) {
+        console.log("Disconnecting from MetaMask...");
+        
+        try {
+          // Try to revoke permissions without reloading the page
+          await window.ethereum.request({
+            method: "wallet_revokePermissions",
+            params: [{ eth_accounts: {} }]
+          });
+          
+          // Clear any stored account data
+          localStorage.removeItem('connectedAccount');
+          
+          // Instead of reloading, we'll handle reconnection in the connectWallet function
+          setStatus('Disconnected. Choose a different account when you reconnect.');
+        } catch (revokeError) {
+          console.log("Could not revoke permissions:", revokeError);
+          // Even if we can't revoke, we can still reset our app state
+          setStatus('Disconnected from wallet. You may need to disconnect in MetaMask settings to change accounts.');
+        }
+      } else {
+        setStatus('Disconnected from wallet');
+      }
+      
+      console.log("Disconnected from wallet");
+    } catch (error) {
+      console.error("Error disconnecting wallet:", error);
+      setStatus(`Error disconnecting: ${error.message || 'Unknown error'}`);
+    }
   };
 
   const checkMetaMaskState = () => {
@@ -544,6 +594,18 @@ function ArbitrumPaymentDemo() {
         const balanceWei = await tokenContract.balanceOf(account);
         const balanceFormatted = ethers.utils.formatUnits(balanceWei, decimals);
         setBalance(`${balanceFormatted} ${tokenSymbol}`);
+        
+        // Track token send event
+        ReactGA.event({
+          category: 'Transaction',
+          action: 'SendTokens',
+          label: tokenSymbol || 'ERC20',
+          value: parseFloat(amount) || 0
+        });
+        console.log("[Analytics] Tracked token send event", {
+          token: tokenSymbol || 'ERC20',
+          amount: parseFloat(amount) || 0
+        });
         
         setIsLoading(false);
       } catch (error) {

@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ReactGA from 'react-ga4';
+
+// Initialize Google Analytics
+const MEASUREMENT_ID = 'G-6R8JZJ1XJ2';
+ReactGA.initialize(MEASUREMENT_ID);
 
 // Define a global browser environment check that can be reused across components
 const isBrowser = typeof window !== 'undefined' && 
@@ -61,6 +66,12 @@ const renderApp = () => {
       );
       
       console.log('[index] App successfully rendered');
+      
+      // Send initial pageview to Google Analytics after the app is rendered
+      if (isBrowser) {
+        ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+        console.log('[index] Initial pageview sent to Google Analytics');
+      }
     } catch (renderError) {
       console.error('[index] Error during ReactDOM.createRoot or render:', renderError);
     }

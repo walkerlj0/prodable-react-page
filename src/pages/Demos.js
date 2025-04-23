@@ -81,7 +81,7 @@ function Demos() {
       <section className="demos-section">
         <h2>Arbitrum Smart Contract Payment</h2>
         <p className="demo-instructions">
-          Interact with ERC20 tokens on Arbitrum Sepolia testnet. Connect your MetaMask wallet to check token balances and send test payments.
+          Interact with ERC20 tokens on Arbitrum Sepolia testnet. See various tokens you can get from this <a href="https://faucets.chain.link/arbitrum-sepolia" target="_blank" rel="noopener noreferrer">faucet</a>. Connect your MetaMask wallet to check token balances and send payments from your wallet addres.
         </p>
         <ArbitrumPaymentDemo />
       </section>

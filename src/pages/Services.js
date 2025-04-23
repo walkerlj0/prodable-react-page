@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import ReactGA from 'react-ga4';
 import Footer from '../components/Footer';
 import './Services.css';
 
@@ -69,6 +70,15 @@ function Services() {
     if (!isBrowser) return;
     
     e.preventDefault();
+    
+    // Track form submission event
+    ReactGA.event({
+      category: 'Engagement',
+      action: 'FormSubmit',
+      label: 'Contact Form'
+    });
+    console.log('[Analytics] Tracked contact form submission');
+    
     // Form submission logic would go here
     alert('Thank you for your message! We will get back to you soon.');
   }, []);

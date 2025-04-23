@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
+import ReactGA from 'react-ga4';
 import titleLogo from '../assets/Prodable_Title-noback.svg';
 import icnLitepaper from '../assets/ICN Litepaper.png';
 import starlinglabdispatch from '../assets/dispatch.png';
@@ -11,6 +12,16 @@ import './Home.css';
 const isBrowser = typeof window !== 'undefined' && 
                  typeof document !== 'undefined' && 
                  !process.env.REACT_APP_HEADLESS_BROWSER;
+
+// Track "See Our Work" click
+const trackSeeOurWorkClick = () => {
+  ReactGA.event({
+    category: 'Engagement',
+    action: 'Click',
+    label: 'See Our Work'
+  });
+  console.log('[Analytics] Tracked "See Our Work" click');
+};
 
 function Home() {
   // Create a simplified version of the content for headless environments
@@ -26,7 +37,7 @@ function Home() {
               that specialize in technical documentation.
             </p>
           </div>
-          <Link to="/portfolio" className="App-link special-font">
+          <Link to="/portfolio" className="App-link special-font" onClick={trackSeeOurWorkClick}>
             See Our Work
           </Link>
         </header>
@@ -70,7 +81,7 @@ function Home() {
                and build out quality documentation and messaging. 
             </p>
           </div>
-          <Link to="/portfolio" className="App-link special-font">
+          <Link to="/portfolio" className="App-link special-font" onClick={trackSeeOurWorkClick}>
             See Our Work
           </Link>
         </header>

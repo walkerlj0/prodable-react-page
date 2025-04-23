@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import ReactGA from 'react-ga4';
 import './Navigation.css';
 import logo from '../assets/prodable-logo-noback.svg';
 
@@ -11,8 +12,18 @@ function Navigation() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Function to scroll to top and close menu
-  const scrollToTopAndCloseMenu = () => {
+  // Function to track navigation clicks
+  const trackNavClick = (linkName) => {
+    ReactGA.event({
+      category: 'Navigation',
+      action: 'Click',
+      label: linkName
+    });
+    console.log(`[Analytics] Tracked navigation click: ${linkName}`);
+  };
+
+  // Function to scroll to top, close menu and track navigation
+  const handleNavClick = (linkName) => {
     if (typeof window !== 'undefined') {
       window.scrollTo({
         top: 0,
@@ -20,6 +31,7 @@ function Navigation() {
       });
     }
     setIsMenuOpen(false);
+    trackNavClick(linkName);
   };
 
   // Add an effect to scroll to top on route change
@@ -44,7 +56,7 @@ function Navigation() {
 
   return (
     <nav className="nav-menu">
-      <Link to="/" className="nav-logo" onClick={scrollToTopAndCloseMenu}>
+      <Link to="/" className="nav-logo" onClick={() => handleNavClick('Logo')}>
         <img src={logo} alt="Prodable" />
       </Link>
       <button className="hamburger" onClick={toggleMenu}>
@@ -53,10 +65,10 @@ function Navigation() {
         <span></span>
       </button>
       <ul className={isMenuOpen ? 'active' : ''}>
-        <li><Link to="/" onClick={scrollToTopAndCloseMenu}>Home</Link></li>
-        <li><Link to="/portfolio" onClick={scrollToTopAndCloseMenu}>Portfolio</Link></li>
-        <li><Link to="/services" onClick={scrollToTopAndCloseMenu}>Services</Link></li>
-        <li><Link to="/demos" onClick={scrollToTopAndCloseMenu}>Demos</Link></li>
+        <li><Link to="/" onClick={() => handleNavClick('Home')}>Home</Link></li>
+        <li><Link to="/portfolio" onClick={() => handleNavClick('Portfolio')}>Portfolio</Link></li>
+        <li><Link to="/services" onClick={() => handleNavClick('Services')}>Services</Link></li>
+        <li><Link to="/demos" onClick={() => handleNavClick('Demos')}>Demos</Link></li>
       </ul>
     </nav>
   );
