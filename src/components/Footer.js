@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import './Footer.css';
+import githubWhiteIcon from '../assets/github-white.png';
 
 function Footer() {
   // Function to smoothly scroll to the contact section
@@ -26,10 +27,13 @@ function Footer() {
           <p><i>Bridging highly technical teams and functional audiences</i></p>
           <a href="https://github.com/walkerlj0/prodable-react-page" target="_blank" rel="noopener noreferrer">
             <img 
-              src={process.env.NODE_ENV === 'development' ? require('../assets/github-white.png') : 'https://storage.googleapis.com/prodable-react-page.appspot.com/github-white.png'} 
+              src="https://firebasestorage.googleapis.com/v0/b/prodable-react-page.appspot.com/o/github-white.png?alt=media"
               alt="GitHub Repository" 
               className="footer-social-icon"
               style={{ height: '35px', marginTop: '10px' }}
+              onError={(e) => {
+                e.target.src = githubWhiteIcon;
+              }}
             />
           </a>
         </div>

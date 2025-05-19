@@ -194,53 +194,56 @@ function Portfolio() {
             <div className="profile-social-container">
               <a href="https://github.com/walkerlj0" target="_blank" rel="noopener noreferrer">
                 <img 
-                  src={githubLogo} 
+                  src="https://firebasestorage.googleapis.com/v0/b/prodable-react-page.appspot.com/o/github.png?alt=media" 
                   alt="GitHub Profile" 
                   className="profile-social-icon" 
                   style={{ height: '25px' }}
                   onError={(e) => {
-                    e.target.src = "https://firebasestorage.googleapis.com/v0/b/prodable-react-page.appspot.com/o/github.png?alt=media";
+                    e.target.src = githubLogo;
                   }}
                 />
               </a>
               <a href="https://www.linkedin.com/in/lindsayjowalker/" target="_blank" rel="noopener noreferrer">
                 <img 
-                  src={process.env.NODE_ENV === 'development' ? require('../assets/linkedin-logo.png') : 'https://storage.googleapis.com/prodable-react-page.appspot.com/linkedin-logo.png'} 
+                  src="https://firebasestorage.googleapis.com/v0/b/prodable-react-page.appspot.com/o/linkedin-logo.png?alt=media" 
                   alt="LinkedIn Profile" 
                   className="profile-social-icon" 
                   style={{ height: '25px', marginLeft: '10px' }}
+                  onError={(e) => {
+                    e.target.src = linkedinLogo;
+                  }}
                 />
               </a>
               <a href="https://app.ens.domains/lindsayj.eth" target="_blank" rel="noopener noreferrer">
                 <img 
-                  src={ethIcon} 
+                  src="https://firebasestorage.googleapis.com/v0/b/prodable-react-page.appspot.com/o/eth-icon.png?alt=media" 
                   alt="Ethereum ENS Profile" 
                   className="profile-social-icon" 
                   style={{ height: '29px' }}
                   onError={(e) => {
-                    e.target.src = "https://firebasestorage.googleapis.com/v0/b/prodable-react-page.appspot.com/o/eth-icon.png?alt=media";
+                    e.target.src = ethIcon;
                   }}
                 />
               </a>
               <a href="https://bsky.app/profile/lindsayj.bsky.social" target="_blank" rel="noopener noreferrer">
                 <img 
-                  src={blueskyLogo} 
+                  src="https://firebasestorage.googleapis.com/v0/b/prodable-react-page.appspot.com/o/Bluesky_logo.png?alt=media" 
                   alt="Bluesky Profile" 
                   className="profile-social-icon" 
                   style={{ height: '25px' }}
                   onError={(e) => {
-                    e.target.src = "https://firebasestorage.googleapis.com/v0/b/prodable-react-page.appspot.com/o/Bluesky_logo.png?alt=media";
+                    e.target.src = blueskyLogo;
                   }}
                 />
               </a>
               <a href="https://www.youtube.com/playlist?list=PLQIpPhDqrx4U3I-MSveHXJg3DWHcvhzfC" target="_blank" rel="noopener noreferrer">
                 <img 
-                  src={youtubeIcon} 
+                  src="https://firebasestorage.googleapis.com/v0/b/prodable-react-page.appspot.com/o/youtube-icon.png?alt=media" 
                   alt="YouTube Playlist" 
                   className="profile-social-icon" 
                   style={{ height: '25px' }}
                   onError={(e) => {
-                    e.target.src = "https://firebasestorage.googleapis.com/v0/b/prodable-react-page.appspot.com/o/youtube-icon.png?alt=media";
+                    e.target.src = youtubeIcon;
                   }}
                 />
               </a>
