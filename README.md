@@ -1,4 +1,9 @@
-# Getting Started with Create React App
+# Prodable.org
+[https://prodable.org/](https://prodable.org/)
+**About the Author**
+[https://prodable.org/portfolio#lindsay](https://prodable.org/portfolio#lindsay)
+
+## Prodable Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -42,8 +47,16 @@ With the appropriate keys/ access you can deploy to firebase.
 
 **Firebase Project Console:** https://console.firebase.google.com/u/0/project/prodable-react-page/overview
 
-Deploy with Firebase
-### `firebase deploy`
+### Deploy with Firebase
+**Deploys to both staging and prod**
+`firebase deploy`
+
+**Deploy to Prod**
+`firebase deploy --only hosting:prodable-react-page`
+
+**Deploy to Staging**
+`firebase deploy --only hosting:staging-prodable-react-page`
+
 
 # List your Firebase projects
 firebase projects:list
