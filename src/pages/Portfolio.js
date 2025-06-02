@@ -225,7 +225,7 @@ function Portfolio() {
                   }}
                 />
               </a>
-              <a href="https://bsky.app/profile/lindsayj.bsky.social" target="_blank" rel="noopener noreferrer">
+              <a href="https://bsky.app/profile/prodable.org" target="_blank" rel="noopener noreferrer">
                 <img 
                   src="https://firebasestorage.googleapis.com/v0/b/prodable-react-page.appspot.com/o/Bluesky_logo.png?alt=media" 
                   alt="Bluesky Profile" 
