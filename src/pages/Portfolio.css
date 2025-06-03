@@ -182,6 +182,10 @@
   background: #e8f0f0; /* Slightly darker but still very subtle teal */
 }
 
+.portfolio-section-alt.dark-bg .portfolio-section-text {
+  background: #fff; /* Ensure text side is white even in dark-bg sections */
+}
+
 .portfolio-section-content {
   display: flex;
   flex-direction: row;
