@@ -12,6 +12,9 @@ When PRs are merged to main, or pushes are made to main, updates can be seen her
 
 Project Console: https://console.firebase.google.com/project/prodable-react-page/overview
 
+## Serve Locally
+To edit and tesst this project, serving it locally, `git clone` this repo, then in the project directory, install dependencies with `npm install`, then run `npm run build:ci`, then run `npm run serve:build`.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -36,6 +39,8 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
+
+To serve and view the build locally run `npm run serve:build`, then ppen [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
