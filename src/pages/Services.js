@@ -199,22 +199,23 @@ function Services() {
             <p><strong>Deliverables:</strong> Authored & updated directly in your website or other system.</p>
             <div className="rate-button">1.7 × base rate</div>
           </div>
-          
+
           <div className="pricing-tier">
             <div className="service-code">004</div>
-            <h3>Platform and Website Setup</h3>
-            <p>This includes services where we are setting up a platform or system for documentation, websites, and other systems. This will include recommendations and custom build out of a platform for your company, and internal documentation of how to use and maintain the platform.</p>
-            <p><strong>Deliverables:</strong> A completely operational website or documentation system.</p>
-            <div className="rate-button">1.8 × base rate</div>
-          </div>
-          
-          <div className="pricing-tier">
-            <div className="service-code">005</div>
             <h3>Documentation Architecture</h3>
             <p>Charges for the planning and design of technical writing systems, and higher-level technical documentation including whitepapers or technical Case Studies. This could include taking an existing body of docs in various systems and creating a usable, consumer-facing written product.</p>
             <p><strong>Deliverables:</strong> Open-ended and complex.</p>
-            <div className="rate-button">1.9 × base rate</div>
+            <div className="rate-button">1.8 × base rate</div>
           </div>
+
+          <div className="pricing-tier">
+            <div className="service-code">005</div>
+            <h3>Platform and Website Setup</h3>
+            <p>This includes services where we are setting up a platform or system for documentation, websites, and other systems. This will include recommendations and custom build out of a platform for your company, and internal documentation of how to use and maintain the platform.</p>
+            <p><strong>Deliverables:</strong> A completely operational website or documentation system.</p>
+            <div className="rate-button">2 × base rate</div>
+          </div>   
+          
         </div>
       </section>
 
