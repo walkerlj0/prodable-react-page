@@ -34,7 +34,7 @@ function Home() {
           <div className="special-font intro-text">
             <p>
               Prodable is a consulting agency made up of experienced, native english-speaking engineers
-              that specialize in technical documentation.
+              that specialize in technical enablement and communication.
             </p>
           </div>
           <Link to="/portfolio" className="App-link special-font" onClick={trackSeeOurWorkClick}>
@@ -47,7 +47,7 @@ function Home() {
               <h2>Our Expertise</h2>
               <p>
                 We are equipped to help emerging and existing tech startups create
-                the training, documentation, messaging, curriculum, and enablement materials
+                the training, documentation, product demos, applications, messaging, curriculum, and enablement materials
                 they need for their partners, users, and customers.
               </p>
             </div>

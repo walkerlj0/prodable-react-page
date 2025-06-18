@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Game from '../components/Game';
 import ArbitrumPaymentDemo from '../components/ArbitrumPaymentDemo';
 import Footer from '../components/Footer';
+import moonoxDocsScreenshot from '../assets/moonox-docs-ss.png';
+import prodableLogo from '../assets/prodable-logo-noback.svg';
 import './Demos.css';
+import './Portfolio.css';
 
 // Animated header logic
 const lines = ["D emos"];
@@ -64,6 +67,58 @@ function AnimatedDemosHeader() {
   );
 }
 
+// PortfolioSection component (copied from Portfolio.js)
+function PortfolioSection({ icon, title, text, image, reverse, darkBg, link, caption, embedContent }) {
+  // Function to handle image loading errors
+  const handleImageError = (e, localImage) => {
+    if (localImage) {
+      e.target.src = localImage;
+    }
+  };
+
+  return (
+    <section className={`portfolio-section-alt${reverse ? ' reverse' : ''}${darkBg ? ' dark-bg' : ''}`}>
+      <div className="portfolio-section-content">
+        <div className="portfolio-section-text">
+          <div className="portfolio-section-title-row">
+            <img src={icon} alt="Section Icon" className="portfolio-section-icon" />
+            <h2>{title}</h2>
+          </div>
+          <p>{text}</p>
+        </div>
+        <div className="portfolio-section-image">
+          {embedContent ? (
+            <div className="portfolio-embed-content" dangerouslySetInnerHTML={{ __html: embedContent }} />
+          ) : image ? (
+            <div className="portfolio-image-wrapper">
+              {link ? (
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                  <img 
+                    src={image} 
+                    alt={title} 
+                    onError={(e) => handleImageError(e, moonoxDocsScreenshot)}
+                  />
+                </a>
+              ) : (
+                <img 
+                  src={image} 
+                  alt={title} 
+                  onError={(e) => handleImageError(e, moonoxDocsScreenshot)}
+                />
+              )}
+              {caption && (
+                <div className="portfolio-image-caption" dangerouslySetInnerHTML={{ __html: caption }} />
+              )}
+            </div>
+          ) : (
+            <div className="portfolio-image-placeholder">Embed/Image</div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Demos() {
   return (
     <div className="page">
@@ -71,6 +126,16 @@ function Demos() {
         <AnimatedDemosHeader />
         <p>Explore our interactive demos to see our technical capabilities in action.</p>
       </div>
+      
+      <PortfolioSection
+        icon={prodableLogo}
+        title="Moonnox Docs Site"
+        text="Comprehensive technical documentation platform built for developers and technical teams. Features interactive search and navigation, analytics, code examples, tailored branding and styling, and detailed guides to help developers integrate and use Moonnox services effectively."
+        image={moonoxDocsScreenshot}
+        reverse={false}
+        darkBg={false}
+        link="https://docs.moonnox.com/"
+      />
       
       <section className="demos-section dark-bg">
         <h2>Prodable Runner</h2>
