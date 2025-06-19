@@ -271,6 +271,26 @@
   text-decoration: underline;
 }
 
+/* LinkedIn button styling */
+.linkedin-button {
+  display: inline-block;
+  background: #528b8b;
+  color: white !important;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none !important;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.linkedin-button:hover {
+  background: #3e6b6b !important;
+  color: white !important;
+  text-decoration: none !important;
+  transform: translateY(-2px);
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;

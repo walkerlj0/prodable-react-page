@@ -228,8 +228,15 @@ function Services() {
         <div className="contact-container">
           <div className="contact-info">
             <div className="contact-method">
-              <h3>Email</h3>
-              <p><a href="mailto:info@prodable.org">info@prodable.org</a></p>
+              <h3>Contact</h3>
+              <a 
+                href="https://www.linkedin.com/company/prodable/services/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="linkedin-button"
+              >
+                Contact us on LinkedIn
+              </a>
             </div>
             <div className="contact-method">
               <h3>Location</h3>
